@@ -1,4 +1,6 @@
 # ResourceHub
-requirements
---flask
---pymysql
+
+## requirements
+
+* flask
+* pymysql
