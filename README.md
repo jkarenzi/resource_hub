@@ -1,1 +1,6 @@
-Resource Hub
+# ResourceHub
+
+## requirements
+
+* flask
+* pymysql
