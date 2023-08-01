@@ -1,1 +1,1 @@
-Resource Hub
+ResourceHub
