@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>resourcehub</title>
+        <meta charset = 'UTF-8'>
+        <link rel="stylesheet" href="../static/css/style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <script src="../static/js/main.js"></script>
+    </head>
+    <body>
+        <header>
+            <a href="/logout">Logout</a>
+            <div class = user>
+                {{username}}
+                <div class = pic>
+                    <img src='../static/images/person.png'>
+                </div>
+            </div>
+        </header>
+        <div class = container>
+            <h3>Create a post</h3>
+            <form action="/read_stats.html" method="POST">
+                <div class = title>
+                    <label for="title">title</label>
+                    <input type="text" name="title" id="title" required>
+                </div>
+                <div class = content>
+                    <label for="title">content</label>
+                    <textarea name="content" id="content" required></textarea>
+                </div>
+                <input type="submit" value="post" id="post">
+            </form>
+        </div>
+        <div class = posts>
+            {% for row in results %}
+            <div class = post>
+                <div class = ti>Title: {{ row[1] }}</div>
+                <div class = f>By: {{ row[2] }}</div>
+                <div class = co>{{ row[3]|autolink|safe }}</div>
+                {% if row[2] == username %}
+                <a href="/delete?post_id={{row[0]}}" class = del>
+                    <img src="../static/images/dustbin1.png" height="14px" width="12px">
+                    delete
+                </a>   
+                {% endif %}
+                <button class="comment-btn" onclick="toggleCommentForm('{{ row[0] }}')">Comment</button>
+                
+                <form action="/add_comment" method="POST" class="comment-form" id="comment-form-{{ row[0] }}">
+                    <input type="hidden" name="post_id" value="{{ row[0] }}">
+                    
+                    <div class="comment-input">
+                        <div class = cancel-btn onclick="toggleCommentForm('{{ row[0] }}')">X</div>
+                        <label for="comment">Comment</label>
+                        <textarea name="comment" id="comment" required></textarea>
+                        <input type="submit" value="Post Comment" id="post_comment">
+                    </div>
+                </form>
+            </div>    
+            {% endfor %}
+        </div>    
+    </body>
+</html>

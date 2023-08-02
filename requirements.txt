@@ -1,0 +1,2 @@
+flask
+pymysql (for making a connection to the database)
