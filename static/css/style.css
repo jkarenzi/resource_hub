@@ -109,6 +109,19 @@ body {
     display: none;
 }
 
+.comm{
+    border-top: 1px solid black;
+    background: white;
+    padding: 1rem;
+    width: 68.4rem;
+    min-height: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 1rem;
+    margin-left: -1rem;
+    margin-bottom: -1rem;
+}
 
 .cancel-btn {
     margin-left: 60rem;
