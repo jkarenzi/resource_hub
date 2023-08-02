@@ -7,22 +7,93 @@ body {
     height: 37.5rem;
 }
 
-.container {
+.container1 {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 3px solid white;
-    width: 55rem;
+    flex-direction: column;
+    border: 1px solid lightgrey;
+    width: 25rem;
     background-color: white;
-    padding: 1rem;
-    margin-top: 1.5rem;
-    box-shadow: 2px 4px 10px lightgrey;
+    height: 31rem;
+    box-shadow: 2px 4px 5px lightgrey;
+    border-radius: 6px;
+}
+
+.container2 {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid lightgrey;
+    width: 25rem;
+    background-color: white;
+    height: 31rem;
+    margin-left: 2rem;
+    box-shadow: 2px 4px 5px lightgrey;
+    border-radius: 8px;
+}
+
+.py{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.pyd {
+    font-size: small;
+    font-weight: 300;
+    margin-left: 2rem;
+    margin-top: -1rem;
+}
+
+.pyd1 {
+    font-size: small;
+    font-weight: 300;
+    margin-left: 2rem;
+    margin-top: -1rem;
+}
+
+.container1 h3{
+    font-weight: 400;
+    margin-left: 2rem;
+}
+
+.container2 h3{
+    font-weight: 400;
+    margin-left: 2rem;
+}
+
+.container1 a {
+    margin-left: 2rem;
+    text-decoration: none;
+    border: 1px solid green;
+    border-radius: 8px;
+    width: 6rem;
+    padding: 0.5rem;
+    text-align: center;
+    color: green;
+}
+
+.container2 a {
+    margin-left: 2rem;
+    text-decoration: none;
+    border: 1px solid green;
+    border-radius: 8px;
+    width: 6rem;
+    padding: 0.5rem;
+    text-align: center;
+    color: green;
+}
+
+
+.container1 a:hover {
+    background-color: #f2f2f2;
 }
 
 .big-container {
     display: flex;
     justify-content: center;
+    align-items: center;
     width: 100%;
+    margin-top: 3rem;
 }
 
 
