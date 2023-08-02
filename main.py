@@ -204,12 +204,12 @@ def add_a_comment():
 #this route gets the python.html template
 @app.route('/python.html')
 def get_python():
-    return render_template('python.html')
+    return render_template('python.html', username=session.get('username'))
 
 #this route gets the linux.html template
 @app.route('/linux.html')
 def get_linux():
-    return render_template('linux.html')
+    return render_template('linux.html', username=session.get('username'))
     
 
 if __name__ == '__main__':
