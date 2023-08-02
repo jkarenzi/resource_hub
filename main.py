@@ -45,7 +45,7 @@ def get():
 
     cursor = connection.cursor()
 
-    sql_query1 = "INSERT INTO posting (title, comment, user) VALUES (%s, %s, %s)"
+    sql_query1 = "INSERT INTO posting (title, content, user) VALUES (%s, %s, %s)"
     cursor.execute(sql_query1, (title, content, user))
     connection.commit()
     connection.close()
