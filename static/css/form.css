@@ -88,6 +88,10 @@ body {
     background-color: #f2f2f2;
 }
 
+.container2 a:hover {
+    background-color: #f2f2f2;
+}
+
 .big-container {
     display: flex;
     justify-content: center;
