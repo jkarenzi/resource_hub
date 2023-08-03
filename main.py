@@ -6,15 +6,17 @@ import re
 app = Flask(__name__)
 app.secret_key = 'kmj123456789'
 
-#this  route handles a get request for user posts
-@app.route('/read_stats.html')  
+# this  route handles a get request for user posts
+
+
+@app.route('/read_stats.html')
 def get_data():
     if 'username' in session:
         connection = pymysql.connect(
-        host = '54.82.71.184',
-        user = 'karenzi',
-        password = '@Karenzijoslyn46',
-        database = 'posts'
+            host='54.82.71.184',
+            user='karenzi',
+            password='@Karenzijoslyn46',
+            database='posts'
         )
 
         cursor = connection.cursor()
@@ -26,10 +28,12 @@ def get_data():
         comments = cursor.fetchall()
         connection.close()
 
-        return render_template('read_stats.html', results=results, comments=comments, username = session.get('username'))
+        return render_template('read_stats.html', results=results, comments=comments, username=session.get('username'))
     return 'UNAUTHORIZED ACCESS. PLEASE LOGIN'
 
-#this route handles user posting
+# this route handles user posting
+
+
 @app.route('/read_stats.html', methods=['POST'])
 def get():
     title = request.form.get('title')
@@ -37,10 +41,10 @@ def get():
     user = session['username']
 
     connection = pymysql.connect(
-        host = '54.82.71.184',
-        user = 'karenzi',
-        password = '@Karenzijoslyn46',
-        database = 'posts'
+        host='54.82.71.184',
+        user='karenzi',
+        password='@Karenzijoslyn46',
+        database='posts'
     )
 
     cursor = connection.cursor()
@@ -53,23 +57,23 @@ def get():
     return redirect('/read_stats.html')
 
 
-#this route returns the login form
+# this route returns the login form
 @app.route('/')
 def login():
     return render_template('login.html')
 
 
-#this route handles user authentication
+# this route handles user authentication
 @app.route('/login', methods=['POST'])
 def auth():
     username = request.form.get('username')
     password = request.form.get('password')
 
     connection = pymysql.connect(
-        host = '54.82.71.184',
-        user = 'karenzi',
-        password = '@Karenzijoslyn46',
-        database = 'resourcehub_users'
+        host='54.82.71.184',
+        user='karenzi',
+        password='@Karenzijoslyn46',
+        database='resourcehub_users'
     )
 
     cursor = connection.cursor()
@@ -85,25 +89,25 @@ def auth():
         if user_name == username and check_password_hash(pass_word, password):
             session['username'] = username
             return redirect(f'/form?username={username}')
-        
+
     error_message = "Invalid credentials"
-    return render_template('login.html', error_message = error_message)
+    return render_template('login.html', error_message=error_message)
 
 
-#this route returns a webpage. not yet worked on
+# this route returns a webpage. not yet worked on
 @app.route('/form')
 def form():
     username = request.args.get('username')
-    return render_template('form.html', username = username)
-        
+    return render_template('form.html', username=username)
 
-#this route returns a signup page
+
+# this route returns a signup page
 @app.route('/signup.html')
 def signup():
     return render_template('signup.html')
 
 
-#this route adds new users to the database (signup)
+# this route adds new users to the database (signup)
 @app.route('/signup', methods=['POST'])
 def auth1():
     username = request.form.get('username')
@@ -111,10 +115,10 @@ def auth1():
     hashed_password = generate_password_hash(password)
 
     connection = pymysql.connect(
-        host = '54.82.71.184',
-        user = 'karenzi',
-        password = '@Karenzijoslyn46',
-        database = 'resourcehub_users'
+        host='54.82.71.184',
+        user='karenzi',
+        password='@Karenzijoslyn46',
+        database='resourcehub_users'
     )
 
     cursor = connection.cursor()
@@ -125,7 +129,7 @@ def auth1():
     for name in results:
         if name[0] == username:
             error_message = "Username already exsits. Choose another one"
-            return render_template('signup.html', error_message = error_message)
+            return render_template('signup.html', error_message=error_message)
 
     sql_query = "INSERT INTO credentials (username, password) VALUES (%s, %s)"
     cursor.execute(sql_query, (username, hashed_password))
@@ -135,16 +139,16 @@ def auth1():
     return redirect('/')
 
 
-#this route handles deleting user posts
+# this route handles deleting user posts
 @app.route('/delete')
 def delete():
     if 'username' in session:
         post_id = request.args.get('post_id', type=int)
         connection = pymysql.connect(
-        host = '54.82.71.184',
-        user = 'karenzi',
-        password = '@Karenzijoslyn46',
-        database = 'posts'
+            host='54.82.71.184',
+            user='karenzi',
+            password='@Karenzijoslyn46',
+            database='posts'
         )
         cursor = connection.cursor()
 
@@ -153,13 +157,13 @@ def delete():
         connection.commit()
         connection.close()
 
-        return redirect('/read_stats.html') 
-    
+        return redirect('/read_stats.html')
+
     else:
         return "UNAUTHORIZED ACCESS. PLEASE LOGIN"
-      
-    
-#this route logs out the user
+
+
+# this route logs out the user
 @app.route('/logout')
 def logout():
     # Clear the session
@@ -168,28 +172,28 @@ def logout():
     return redirect('/')
 
 
-#this filter is used to make sure that if a user posts a link, then that link
-#is displayed as a hyperlink, so that it will be clickable
+# this filter is used to make sure that if a user posts a link, then that link
+# is displayed as a hyperlink, so that it will be clickable
 @app.template_filter('autolink')
 def autolink(s):
     # Regular expression to find URLs in the string
     regex = r'https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+'
-    
+
     # Replace URLs with clickable links
     return re.sub(regex, r'<a href="\g<0>" target="_blank">\g<0></a>', s)
 
 
-@app.route('/add_comment', methods = ['POST'])
+@app.route('/add_comment', methods=['POST'])
 def add_a_comment():
     post_id = int(request.form.get('post_id'))
     comment = request.form.get('comment')
     user = session['username']
 
     connection = pymysql.connect(
-    host = '54.82.71.184',
-    user = 'karenzi',
-    password = '@Karenzijoslyn46',
-    database = 'posts'
+        host='54.82.71.184',
+        user='karenzi',
+        password='@Karenzijoslyn46',
+        database='posts'
     )
 
     cursor = connection.cursor()
@@ -201,16 +205,20 @@ def add_a_comment():
 
     return redirect('/read_stats.html')
 
-#this route gets the python.html template
+# this route gets the python.html template
+
+
 @app.route('/python.html')
 def get_python():
     return render_template('python.html', username=session.get('username'))
 
-#this route gets the linux.html template
+# this route gets the linux.html template
+
+
 @app.route('/linux.html')
 def get_linux():
     return render_template('linux.html', username=session.get('username'))
-    
+
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)    
+    app.run(host='0.0.0.0', port=5000)

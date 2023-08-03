@@ -1,28 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>resourcehub</title>
-        <meta charset = 'UTF-8'>
-        <link rel="stylesheet" href="../static/css/python.css">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    </head>
-    <body>
-        <header>
-            <h3>Resourcehub</h3>
-            <nav>
-                <a href="./read_stats.html">community</a>
-                <a href="/logout">logout</a>
-                <div class = user>
-                    {{username}}
-                    <div class = pic>
-                        <img src='../static/images/person.png'>
-                    </div>
-                </div>
-            </nav>
-        </header>
-        <div class = big-container>
-            loren ipsum
+
+  <head>
+    <title>resourcehub</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous" />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+      crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../static/css/python.css" />
+  </head>
+  <body>
+    <header>
+      <a href="./read_stats.html">Community</a>
+      <a href="/logout">logout</a>
+      <div class="user">
+        {{username}}
+        <div class="pic">
+          <img src="../static/images/person.png" />
+      </div>
+    </header>
+    <div class="big-container">
+      <div class="px-4 py-3 my-3 text-start container-1">
+        <h3 class="display-5 fw-bold text-center">Coding with Mosh</h3>
+        <div class="mx-auto">
+          <p class="lead mb-4">
+            Python tutorial - Python full course for beginners - Go from Zero to
+            Hero with Python (includes machine learning & web development
+            projects).
+          </p>
+          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <button type="button" class="btn btn-success btn-lg px-4 gap-3">
+              <a
+                href="https://www.youtube.com/playlist?list=PLTjRvDozrdlxlMnoG9_yJKPMxMJu8FWRK"
+                >Check out</a
+              >
+            </button>
+          </div>
         </div>
-    </body>
+      </div>
+      <div class="px-4 py-3 my-3 text-start container-1">
+        <h3 class="display-5 fw-bold text-center">Tech with Tim</h3>
+        <div class="mx-5">
+          <p class="lead mb-4">
+            Learn the Python programming language from scratch. This series is
+            designed for complete beginners and will walk you through the python
+            programming language. Absolutely no experience required. I explain
+            everything in depth and give effective examples to help you
+            understand. It is recommenced that you type along with me and try to
+            create your own programs as you follow along.
+          </p>
+          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <button type="button" class="btn btn-success btn-lg px-4 gap-3">
+              <a
+                href="https://www.techwithtim.net/tutorials/python-programming/beginner-python-tutorials"
+                >Check out</a
+              >
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="px-4 py-3 my-3 text-start container-1">
+        <h3 class="display-5 fw-bold text-center">W3schools</h3>
+        <div class="mx-5">
+          <p class="lead mb-4">
+            W3Schools is a freemium educational website for learning coding
+            online. Initially released in 1998, it derives its name from the
+            World Wide Web but is not affiliated with the W3 Consortium.
+            W3Schools offers courses covering all aspects of web development.
+          </p>
+          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <button type="button" class="btn btn-success btn-lg px-4 gap-3">
+              <a href="https://www.w3schools.com/python/default.asp"
+                >Check out</a
+              >
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
