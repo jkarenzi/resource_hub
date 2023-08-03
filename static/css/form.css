@@ -4,7 +4,9 @@ body {
     font-family: 'Poppins', sans-serif;
     background-color: #f2f2f2;
     color: black;
-    height: 37.5rem;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
 }
 
 .container1 {
@@ -139,6 +141,7 @@ header a:hover{
     display: flex;
     margin-right: 1rem;
     align-items: center;
+    cursor: pointer;
 }
 
 .user:hover {
@@ -176,4 +179,64 @@ footer h4{
 footer a{
     margin-left: 1rem;
     margin-top: 0.4rem;
+}
+
+.profile-pic {
+    position: absolute;
+    top: 5.1rem;
+    right: 0;
+    background-color: white;
+    width: 15rem;
+    height: 8rem;
+    border: 1px solid green;
+    border-radius: 6px;
+    display: none;
+}
+
+.profile-pic h3 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: small;
+}
+
+.profile-pic form {
+    display: flex;
+    flex-direction: column;
+    height: 5rem;
+    justify-content: center;
+}
+
+#submit-pic {
+    width: 5rem;
+    height: 1.5rem;
+    background: white;
+    border: 1px solid green;
+    color: green;
+    border-radius: 6px;
+    margin-top: 1rem;
+    margin-left: 4.7rem;
+}
+
+#file {
+    margin-left: 1rem;
+}
+
+.can {
+    border: 2px solid green;
+    border-radius: 6px;
+    width: 0.9rem;
+    height: 1rem;
+    cursor: pointer;
+    margin-right: 0.7rem;
+    font-size:smaller;
+    font-weight: 800;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.q {
+    display: flex;
+    align-items: center;
 }

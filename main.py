@@ -220,5 +220,8 @@ def get_linux():
     return render_template('linux.html', username=session.get('username'))
 
 
+
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
