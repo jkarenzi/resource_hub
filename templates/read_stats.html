@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="../static/css/style.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <script src="../static/js/main.js"></script>
     </head>
     <body>
         <header>
@@ -41,8 +42,27 @@
                 <a href="/delete?post_id={{row[0]}}" class = del>
                     <img src="../static/images/dustbin1.png" height="14px" width="12px">
                     delete
-                </a>
+                </a>   
                 {% endif %}
+                <button class="comment-btn" onclick="toggleCommentForm('{{ row[0] }}')">Comment</button>
+                {% for comment in comments %}
+                {% if comment[0] == row[0] %}
+                <div class = comm>
+                    <div class = f>By: {{ comment[2] }}</div>
+                    <div class = co>{{ comment[3]|autolink|safe }}</div>
+                </div>
+                {% endif %}
+                {% endfor %}
+                
+                <form action="/add_comment" method="POST" class="comment-form" id="comment-form-{{ row[0] }}">
+                    <input type="hidden" name="post_id" value="{{ row[0] }}">
+                    <div class="comment-input">
+                        <div class = cancel-btn onclick="toggleCommentForm('{{ row[0] }}')">X</div>
+                        <label for="comment">Comment</label>
+                        <textarea name="comment" id="comment" required></textarea>
+                        <input type="submit" value="Post Comment" id="post_comment">
+                    </div>
+                </form>
             </div>    
             {% endfor %}
         </div>    

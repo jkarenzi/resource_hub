@@ -21,9 +21,12 @@ def get_data():
         sql_query = "SELECT id, title, user, content FROM posting ORDER BY id DESC"
         cursor.execute(sql_query)
         results = cursor.fetchall()
+        sql_query1 = "SELECT post_id, id, user, comment FROM comments ORDER BY id DESC"
+        cursor.execute(sql_query1)
+        comments = cursor.fetchall()
         connection.close()
 
-        return render_template('read_stats.html', results=results, username = session.get('username'))
+        return render_template('read_stats.html', results=results, comments=comments, username = session.get('username'))
     return 'UNAUTHORIZED ACCESS. PLEASE LOGIN'
 
 #this route handles user posting
@@ -175,6 +178,39 @@ def autolink(s):
     # Replace URLs with clickable links
     return re.sub(regex, r'<a href="\g<0>" target="_blank">\g<0></a>', s)
 
+
+@app.route('/add_comment', methods = ['POST'])
+def add_a_comment():
+    post_id = int(request.form.get('post_id'))
+    comment = request.form.get('comment')
+    user = session['username']
+
+    connection = pymysql.connect(
+    host = '54.82.71.184',
+    user = 'karenzi',
+    password = '@Karenzijoslyn46',
+    database = 'posts'
+    )
+
+    cursor = connection.cursor()
+
+    sql_query = "INSERT INTO comments (post_id, comment, user) VALUES (%s, %s, %s)"
+    cursor.execute(sql_query, (post_id, comment, user))
+    connection.commit()
+    connection.close()
+
+    return redirect('/read_stats.html')
+
+#this route gets the python.html template
+@app.route('/python.html')
+def get_python():
+    return render_template('python.html', username=session.get('username'))
+
+#this route gets the linux.html template
+@app.route('/linux.html')
+def get_linux():
+    return render_template('linux.html', username=session.get('username'))
+    
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)    
