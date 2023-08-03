@@ -9,12 +9,25 @@ body {
 
 header{
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
     background-color: white;
     border-bottom: 2px solid white;
     height: 5rem;
     box-shadow: 2px 4px 5px lightgrey;
+}
+
+header h3{
+    font-weight: 600;
+    font-size: x-large;
+    font-family: cursive;
+    margin-left: 1rem;
+    color: green;
+}
+
+nav {
+    width: 17rem;
+    display: flex;
 }
 
 header a{
