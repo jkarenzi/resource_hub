@@ -4,7 +4,6 @@ body {
     font-family: 'Poppins', sans-serif;
     background-color: #f2f2f2;
     color: black;
-    height: 37.5rem;
 }
 
 header{
@@ -65,80 +64,41 @@ header a:hover{
     height: 100%;
 }
 
-body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Poppins', sans-serif;
-    background-color: #f2f2f2;
-    color: black;
-}
-
-.big-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 2rem;
-    margin-top: 3rem;
-}
-
-.container1,
-.container2 {
+.big-container{
     display: flex;
     flex-direction: column;
-    border: 1px solid lightgrey;
-    width: 65rem;
-    background-color: white;
-    height: 20rem;
+    /* justify-content: center; */
+    align-items: center;
+}
+
+.container-1{
+    background-color: rgb(185, 187, 189);
     box-shadow: 2px 4px 5px lightgrey;
-    border-radius: 8px;
-    margin-left: 2rem;
-    padding: 1rem;
+    background-color: white;
+    width: 50rem;
+    border-radius: 1.5%;
 }
 
-.py {
-    display: flex;
-    width: 10%;
-    justify-content: space-between;
-    align-items: left;
-    margin-top: 2rem;
-}
-
-.pyd1 {
-    font-size: small;
-    font-weight: 300;
-    margin-left: 2rem;
-    margin-top: 1rem;
-}
-
-.container1 h3,
-.container2 h3 {
-    font-weight: 400;
-    margin-top: 1rem;
-    margin-left: 8rem;
-
-}
-
-.container1 p,
-.container2 p {
-    font-size: small;
-    font-weight: 300;
-    margin-bottom: 1rem;
-}
-
-.container1 a,
-.container2 a {
-    display: inline-block;
+a{
     text-decoration: none;
-    border: 1px solid green;
-    border-radius: 8px;
-    width: 6rem;
-    padding: 0.5rem;
-    text-align: center;
-    color: green;
+    color: #f2f2f2;
 }
 
-.container1 a:hover,
-.container2 a:hover {
-    background-color: #f2f2f2;
+footer{
+    display: flex;
+    border-top: 1px solid grey;
+    background-color: white;
+    height: 5rem;
+    align-items: center;
 }
+
+footer h4{
+    font-weight: 500;
+    margin-left: 2rem;
+}
+
+footer a{
+    margin-left: 1rem;
+    margin-top: 0.4rem;
+}
+
