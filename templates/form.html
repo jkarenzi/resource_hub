@@ -17,7 +17,7 @@
                 <div class = user onclick="toggleProfile()">
                     {{username}}
                     <div class = pic>
-                        <img src='../static/images/person.png'>
+                        <img src='../static/uploads/{{filename}}'>
                     </div>
                 </div>
             </nav>   
@@ -25,7 +25,7 @@
                 <h3>Upload profile picture</h3>
                 <form action="/upload" method="post" enctype="multipart/form-data">
                     <div class = q>
-                        <input type="file" name="file" id="file" accept="image/jpeg, image/jpg, image/png, image/gif">
+                        <input type="file" name="file" id="file" accept="image/jpeg, image/jpg, image/png, image/gif" required>
                         <div class = can onclick="clearFile()">X</div>
                     </div>
                     <input type="submit" value="Upload" id="submit-pic">
