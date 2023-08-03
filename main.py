@@ -1,10 +1,13 @@
 from flask import Flask, render_template, request, session, redirect
 from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.utils import secure_filename
+import os
 import pymysql
 import re
 
 app = Flask(__name__)
 app.secret_key = 'kmj123456789'
+app.config['UPLOAD_FOLDER'] = os.path.join(app.root_path, 'static', 'uploads')
 
 # this  route handles a get request for user posts
 
@@ -94,11 +97,28 @@ def auth():
     return render_template('login.html', error_message=error_message)
 
 
-# this route returns a webpage. not yet worked on
+# this route returns the home page
 @app.route('/form')
 def form():
-    username = request.args.get('username')
-    return render_template('form.html', username=username)
+    if 'username' in session:
+        username = session.get('username')
+
+        # List all files in the 'uploads' folder. will return a list
+        uploaded_files = os.listdir(app.config['UPLOAD_FOLDER'])
+
+        #giving it a default value of None
+        user_file = None
+
+        #searching for a file that corresponds with our user
+        for file in uploaded_files:
+            if file.startswith(username):
+                user_file = file
+                break
+
+        if user_file is None:
+            return render_template('form.html', filename='person.png', username=username)
+        return render_template('form.html', username=username, filename=user_file)
+    return "UNAUTHORIZED ACCESS. PLEASE LOGIN"
 
 
 # this route returns a signup page
@@ -220,7 +240,32 @@ def get_linux():
     return render_template('linux.html', username=session.get('username'))
 
 
+#this route handles user uploading profile picture
 
+
+@app.route('/upload', methods=['POST'])
+def upload():
+    if 'username' in session:
+        username = session.get('username')
+        file = request.files['file']
+
+        # Secure the filename
+        filename = secure_filename(file.filename)
+
+        uploaded_files = os.listdir(app.config['UPLOAD_FOLDER'])
+        for existing_file in uploaded_files:
+            if existing_file.startswith(username):
+                os.remove(os.path.join(app.config['UPLOAD_FOLDER'], existing_file))
+                break
+
+        # Rename the file with the username
+        new_filename = f"{username}_{filename}"
+
+        # Save the uploaded file
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], new_filename))
+
+        return redirect('/form')
+    return 'UNAUTHORIZED ACCESS. PLEASE LOGIN'
 
 
 if __name__ == '__main__':
