@@ -255,7 +255,7 @@ def upload():
         username = session.get('username')
         file = request.files['file']
 
-        # Secure the filename
+        # Securing the filename(incase there are malicious xters)
         filename = secure_filename(file.filename)
 
         uploaded_files = os.listdir(app.config['UPLOAD_FOLDER'])
@@ -264,23 +264,23 @@ def upload():
                 os.remove(os.path.join(app.config['UPLOAD_FOLDER'], existing_file))
                 break
 
-        # Rename the file with the username
+        # Renaming the file with the username(naming convention to map usernames to their profile pics)
         new_filename = f"{username}_{filename}"
 
-        # Save the uploaded file
+        # Saving the uploaded file
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], new_filename))
 
         return redirect('/form')
     return redirect('/')
 
 
+#a filter to search for the right image based on the username prefix
 @app.template_filter('find_user')
 def find_user(uploaded_files, username_prefix):
     for item in uploaded_files:
         if item.startswith(username_prefix):
             return item
     return None
-
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)

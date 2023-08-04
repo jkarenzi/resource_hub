@@ -74,15 +74,6 @@
                     {% endif %}
                     <button class="comment-btn" onclick="toggleCommentForm('{{ row[0] }}')">Comment</button>
                 </div>
-                {% for comment in comments %}
-                    {% if comment[0] == row[0] %}
-                        <div class = comm>
-                            <div class = f>By: {{ comment[2] }}</div>
-                            <div class = co>{{ comment[3]|autolink|safe }}</div>
-                        </div>
-                    {% endif %}
-                {% endfor %}
-                
                 <form action="/add_comment" method="POST" class="comment-form" id="comment-form-{{ row[0] }}">
                     <input type="hidden" name="post_id" value="{{ row[0] }}">
                     <div class="comment-input">
@@ -92,6 +83,14 @@
                         <input type="submit" value="Post Comment" id="post_comment">
                     </div>
                 </form>
+                {% for comment in comments %}
+                    {% if comment[0] == row[0] %}
+                        <div class = comm>
+                            <div class = f>By: {{ comment[2] }}</div>
+                            <div class = co>{{ comment[3]|autolink|safe }}</div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
             </div>    
             {% endfor %}
         </div>    
