@@ -65,13 +65,15 @@
                     </div>
                 </div>
                 <div class = co>{{ row[3]|autolink|safe }}</div>
-                {% if row[2] == username %}
-                    <a href="/delete?post_id={{row[0]}}" class = del>
-                        <img src="../static/images/dustbin1.png" height="14px" width="12px">
-                        delete
-                    </a>   
-                {% endif %}
-                <button class="comment-btn" onclick="toggleCommentForm('{{ row[0] }}')">Comment</button>
+                <div class = g>
+                    {% if row[2] == username %}
+                        <a href="/delete?post_id={{row[0]}}" class = del>
+                            <img src="../static/images/dustbin1.png" height="14px" width="12px">
+                            delete
+                        </a>   
+                    {% endif %}
+                    <button class="comment-btn" onclick="toggleCommentForm('{{ row[0] }}')">Comment</button>
+                </div>
                 {% for comment in comments %}
                     {% if comment[0] == row[0] %}
                         <div class = comm>

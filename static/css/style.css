@@ -65,7 +65,6 @@ body {
     background: green;
     border: 1px solid green;
     color: white;
-    margin-top: 0.5rem;
     width: 5rem;
     height: 1.6rem;
     cursor: pointer;
@@ -157,11 +156,16 @@ body {
     font-size: 12px;
 }
 
+.g {
+    display: flex;
+    margin-top: 1rem;
+}
+
 .del{
     background: green;
     border: 1px solid green;
+    margin-right: 1rem;
     color: white;
-    margin-top: 0.5rem;
     width: 4.5rem;
     height: 1.5rem;
     cursor: pointer;
