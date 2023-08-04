@@ -7,7 +7,6 @@ body {
     justify-content: space-between;
     display: flex;
     flex-direction: column;
-    height: 100vh;
 }
 
 .container1 {
@@ -126,6 +125,7 @@ header h3{
 nav {
     width: 17rem;
     display: flex;
+    align-items: center;
 }
 
 header a{
@@ -152,8 +152,8 @@ header a:hover{
 
 .pic{
     border: 1px solid green;
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 1.7rem;
+    height: 1.7rem;
     margin-left: 0.3rem;
     border-radius: 3rem;
     overflow: hidden;
@@ -218,13 +218,15 @@ footer a{
     margin-left: 4.7rem;
 }
 
+#submit-pic:hover{
+    background-color: #f2f2f2;
+}
+
 #file {
     margin-left: 1rem;
 }
 
 .can {
-    border: 2px solid green;
-    border-radius: 6px;
     width: 0.9rem;
     height: 1rem;
     cursor: pointer;
