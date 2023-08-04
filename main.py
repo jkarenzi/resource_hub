@@ -30,9 +30,10 @@ def get_data():
         cursor.execute(sql_query1)
         comments = cursor.fetchall()
         connection.close()
+        filename = request.args.get('filename')
 
-        return render_template('read_stats.html', results=results, comments=comments, username=session.get('username'))
-    return 'UNAUTHORIZED ACCESS. PLEASE LOGIN'
+        return render_template('read_stats.html', results=results, comments=comments, filename=filename, username=session.get('username'))
+    return redirect('/')
 
 # this route handles user posting
 
@@ -118,7 +119,7 @@ def form():
         if user_file is None:
             return render_template('form.html', filename='person.png', username=username)
         return render_template('form.html', username=username, filename=user_file)
-    return "UNAUTHORIZED ACCESS. PLEASE LOGIN"
+    return redirect('/')
 
 
 # this route returns a signup page
@@ -180,7 +181,7 @@ def delete():
         return redirect('/read_stats.html')
 
     else:
-        return "UNAUTHORIZED ACCESS. PLEASE LOGIN"
+        return redirect('/')
 
 
 # this route logs out the user
@@ -230,14 +231,16 @@ def add_a_comment():
 
 @app.route('/python.html')
 def get_python():
-    return render_template('python.html', username=session.get('username'))
+    filename = request.args.get('filename')
+    return render_template('python.html', filename=filename, username=session.get('username'))
 
 # this route gets the linux.html template
 
 
 @app.route('/linux.html')
 def get_linux():
-    return render_template('linux.html', username=session.get('username'))
+    filename = request.args.get('filename')
+    return render_template('linux.html', filename=filename, username=session.get('username'))
 
 
 #this route handles user uploading profile picture
@@ -265,7 +268,7 @@ def upload():
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], new_filename))
 
         return redirect('/form')
-    return 'UNAUTHORIZED ACCESS. PLEASE LOGIN'
+    return redirect('/')
 
 
 if __name__ == '__main__':

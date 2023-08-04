@@ -17,9 +17,31 @@
       integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
       crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../static/css/python.css" />
+    <script src="../static/js/main.js"></script>
   </head>
   <body>
     <header>
+        <h3>Resourcehub</h3>
+        <nav>
+            <a href="./read_stats.html?filename={{filename}}">community</a>
+            <a href="/logout">logout</a>
+            <div class = user onclick="toggleProfile()">
+                {{username}}
+                <div class = pic>
+                    <img src='../static/uploads/{{filename}}'>
+                </div>
+            </div>
+        </nav> 
+        <div class = profile-pic>
+            <h3>Upload profile picture</h3>
+            <form action="/upload" method="post" enctype="multipart/form-data">
+                <div class = q>
+                    <input type="file" name="file" id="file" accept="image/jpeg, image/jpg, image/png, image/gif" required>
+                    <div class = can onclick="clearFile()">X</div>
+                </div>
+                <input type="submit" value="Upload" id="submit-pic">
+            </form>
+        </div> 
       <h3>Resourcehub</h3>
       <nav>
         <a href="./read_stats.html">Community</a>
