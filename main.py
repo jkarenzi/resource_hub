@@ -9,6 +9,7 @@ app = Flask(__name__)
 app.secret_key = 'kmj123456789'
 app.config['UPLOAD_FOLDER'] = os.path.join(app.root_path, 'static', 'uploads')
 
+
 # this  route handles a get request for user posts
 
 
@@ -32,7 +33,9 @@ def get_data():
         connection.close()
         filename = request.args.get('filename')
 
-        return render_template('read_stats.html', results=results, comments=comments, filename=filename, username=session.get('username'))
+        uploaded_files = os.listdir(app.config['UPLOAD_FOLDER'])
+
+        return render_template('read_stats.html', uploaded_files=uploaded_files, results=results, comments=comments, filename=filename, username=session.get('username'))
     return redirect('/')
 
 # this route handles user posting
@@ -269,6 +272,14 @@ def upload():
 
         return redirect('/form')
     return redirect('/')
+
+
+@app.template_filter('find_user')
+def find_user(uploaded_files, username_prefix):
+    for item in uploaded_files:
+        if item.startswith(username_prefix):
+            return item
+    return None
 
 
 if __name__ == '__main__':

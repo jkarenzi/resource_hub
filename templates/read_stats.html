@@ -48,23 +48,37 @@
         <div class = posts>
             {% for row in results %}
             <div class = post>
-                <div class = ti>Title: {{ row[1] }}</div>
-                <div class = f>By: {{ row[2] }}</div>
+                <div class = x>
+                    {% set user = uploaded_files|find_user(row[2]) %}
+                    {% if user is none %}
+                        <div class="pic1">
+                            <img src='../static/uploads/person.png'>
+                        </div>
+                    {% else %}
+                        <div class="pic1">
+                            <img src='../static/uploads/{{ user }}'>
+                        </div>      
+                    {% endif %}
+                    <div class = b>
+                        <div class = ti>{{ row[1] }}</div>
+                        <div class = f>By: {{ row[2] }}</div>
+                    </div>
+                </div>
                 <div class = co>{{ row[3]|autolink|safe }}</div>
                 {% if row[2] == username %}
-                <a href="/delete?post_id={{row[0]}}" class = del>
-                    <img src="../static/images/dustbin1.png" height="14px" width="12px">
-                    delete
-                </a>   
+                    <a href="/delete?post_id={{row[0]}}" class = del>
+                        <img src="../static/images/dustbin1.png" height="14px" width="12px">
+                        delete
+                    </a>   
                 {% endif %}
                 <button class="comment-btn" onclick="toggleCommentForm('{{ row[0] }}')">Comment</button>
                 {% for comment in comments %}
-                {% if comment[0] == row[0] %}
-                <div class = comm>
-                    <div class = f>By: {{ comment[2] }}</div>
-                    <div class = co>{{ comment[3]|autolink|safe }}</div>
-                </div>
-                {% endif %}
+                    {% if comment[0] == row[0] %}
+                        <div class = comm>
+                            <div class = f>By: {{ comment[2] }}</div>
+                            <div class = co>{{ comment[3]|autolink|safe }}</div>
+                        </div>
+                    {% endif %}
                 {% endfor %}
                 
                 <form action="/add_comment" method="POST" class="comment-form" id="comment-form-{{ row[0] }}">
