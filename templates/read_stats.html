@@ -11,6 +11,12 @@
     <body>
         <header>
             <h3>Resourcehub</h3>
+            <form class="searchbar">
+                <button type="submit" id="searchbar-btn">
+                    <img src="../static/images/search-interface-symbol.png" width="15px" height="15px" alt="Search">
+                </button>
+                <input type="text" id="searchInput" required>
+            </form>
             <nav>
                 <a href="/logout">logout</a>
                 <div class = user onclick="toggleProfile()">
