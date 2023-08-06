@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, session, redirect
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
+import json
 import os
 import pymysql
 import re
@@ -16,13 +17,16 @@ app.config['UPLOAD_FOLDER'] = os.path.join(app.root_path, 'static', 'uploads')
 @app.route('/read_stats.html')
 def get_data():
     if 'username' in session:
+        query = request.args.get('query', "").lower()
+        username = session.get('username')
         connection = pymysql.connect(
             host='54.82.71.184',
             user='karenzi',
             password='@Karenzijoslyn46',
             database='posts'
         )
-
+        
+        #retrieving comments
         cursor = connection.cursor()
         sql_query = "SELECT id, title, user, content FROM posting ORDER BY id DESC"
         cursor.execute(sql_query)
@@ -30,10 +34,34 @@ def get_data():
         sql_query1 = "SELECT post_id, id, user, comment FROM comments ORDER BY id DESC"
         cursor.execute(sql_query1)
         comments = cursor.fetchall()
-        connection.close()
-        filename = request.args.get('filename')
 
+        #giving it a default value of None
+        user_file = None
         uploaded_files = os.listdir(app.config['UPLOAD_FOLDER'])
+        #searching for a file that corresponds with our user
+        for file in uploaded_files:
+            if file.startswith(username):
+                user_file = file
+                break
+
+        if user_file is None:
+            filename = 'person.png'
+        else:
+            filename = user_file    
+        
+        #handling search
+        sql_query2 = "SELECT id, title, user, content FROM posting WHERE title LIKE %s OR content LIKE %s ORDER BY id DESC"
+        query_pattern = f'%{query}%'
+        cursor.execute(sql_query2,(query_pattern, query_pattern))
+        search_results = cursor.fetchall()
+        connection.close()
+    
+       
+        if search_results:
+            return render_template('read_stats.html', uploaded_files=uploaded_files, results=search_results, comments=comments, filename=filename, username=session.get('username'))
+        elif not search_results:
+            message = "No matches found"
+            return render_template('read_stats.html', message=message, uploaded_files=uploaded_files, results=search_results, comments=comments, filename=filename, username=session.get('username'))
 
         return render_template('read_stats.html', uploaded_files=uploaded_files, results=results, comments=comments, filename=filename, username=session.get('username'))
     return redirect('/')
@@ -152,7 +180,7 @@ def auth1():
     results = cursor.fetchall()
     for name in results:
         if name[0] == username:
-            error_message = "Username already exsits. Choose another one"
+            error_message = "Username already exists. Choose another one"
             return render_template('signup.html', error_message=error_message)
 
     sql_query = "INSERT INTO credentials (username, password) VALUES (%s, %s)"
@@ -281,6 +309,8 @@ def find_user(uploaded_files, username_prefix):
         if item.startswith(username_prefix):
             return item
     return None
+
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)

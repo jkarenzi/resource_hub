@@ -356,3 +356,8 @@ header a:hover{
     padding-right: 0.5rem;
     margin-left: 5rem;
 }
+
+.no_match {
+    color: black;
+    font-size: larger;
+}
