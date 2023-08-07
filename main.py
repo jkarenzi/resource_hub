@@ -218,8 +218,8 @@ def logout():
 #is displayed as a hyperlink, so that it will be clickable
 @app.template_filter('autolink')
 def autolink(s):
-    #this regular expression finds links that may have been posted
-    regex = r'https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+'
+    #this regular expression matches links that may have been posted
+    regex = r'https?://(?:[-\w]+\.)*(?:[-\w]+)\.(?:com|org|net|gov|edu|info|biz|co|io|dev)(?:/[-\w./?%&=]*)?'
 
     #here, we are replacing the original link with a clickable link
     return re.sub(regex, r'<a href="\g<0>" target="_blank">\g<0></a>', s)
