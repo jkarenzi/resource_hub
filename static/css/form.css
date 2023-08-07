@@ -308,6 +308,7 @@ footer a{
     padding: 0.5rem;
     text-align: center;
     color: green;
+    margin-top: 0.3rem;
 }
 
 
@@ -323,5 +324,11 @@ footer a{
 
 .container4 img {
     margin-right: 2rem;
-    margin-left: 0.5rem;
+    margin-left: 1rem;
+}
+
+.container4 .py{
+    height: 6rem;
+    align-items: center;
+    margin-bottom: 0.3rem;
 }
