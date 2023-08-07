@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, session, redirect
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
-import json
 import os
 import pymysql
 import re
@@ -12,13 +11,12 @@ app.config['UPLOAD_FOLDER'] = os.path.join(app.root_path, 'static', 'uploads')
 
 
 # this  route handles a get request for user posts
-
-
 @app.route('/read_stats.html')
 def get_data():
     if 'username' in session:
         query = request.args.get('query', "").lower()
         username = session.get('username')
+
         connection = pymysql.connect(
             host='54.82.71.184',
             user='karenzi',
@@ -26,7 +24,7 @@ def get_data():
             database='posts'
         )
         
-        #retrieving comments
+        #retrieving posts and comments
         cursor = connection.cursor()
         sql_query = "SELECT id, title, user, content FROM posting ORDER BY id DESC"
         cursor.execute(sql_query)
@@ -35,10 +33,9 @@ def get_data():
         cursor.execute(sql_query1)
         comments = cursor.fetchall()
 
-        #giving it a default value of None
         user_file = None
         uploaded_files = os.listdir(app.config['UPLOAD_FOLDER'])
-        #searching for a file that corresponds with our user
+    
         for file in uploaded_files:
             if file.startswith(username):
                 user_file = file
@@ -51,12 +48,11 @@ def get_data():
         
         #handling search
         sql_query2 = "SELECT id, title, user, content FROM posting WHERE title LIKE %s OR content LIKE %s ORDER BY id DESC"
-        query_pattern = f'%{query}%'
-        cursor.execute(sql_query2,(query_pattern, query_pattern))
+        query_1 = f'%{query}%'
+        cursor.execute(sql_query2,(query_1, query_1))
         search_results = cursor.fetchall()
         connection.close()
     
-       
         if search_results:
             return render_template('read_stats.html', uploaded_files=uploaded_files, results=search_results, comments=comments, filename=filename, username=session.get('username'))
         elif not search_results:
@@ -66,9 +62,8 @@ def get_data():
         return render_template('read_stats.html', uploaded_files=uploaded_files, results=results, comments=comments, filename=filename, username=session.get('username'))
     return redirect('/')
 
+
 # this route handles user posting
-
-
 @app.route('/read_stats.html', methods=['POST'])
 def get():
     title = request.form.get('title')
@@ -134,14 +129,10 @@ def auth():
 def form():
     if 'username' in session:
         username = session.get('username')
-
-        # List all files in the 'uploads' folder. will return a list
         uploaded_files = os.listdir(app.config['UPLOAD_FOLDER'])
-
-        #giving it a default value of None
+        
+        #searching the uploaded_files list for a picture that corresponds with the current username
         user_file = None
-
-        #searching for a file that corresponds with our user
         for file in uploaded_files:
             if file.startswith(username):
                 user_file = file
@@ -196,6 +187,7 @@ def auth1():
 def delete():
     if 'username' in session:
         post_id = request.args.get('post_id', type=int)
+
         connection = pymysql.connect(
             host='54.82.71.184',
             user='karenzi',
@@ -218,20 +210,18 @@ def delete():
 # this route logs out the user
 @app.route('/logout')
 def logout():
-    # Clear the session
     session.pop('username', None)
-    # Redirect to the login page
     return redirect('/')
 
 
-# this filter is used to make sure that if a user posts a link, then that link
-# is displayed as a hyperlink, so that it will be clickable
+#this filter is used to make sure that if a user posts a link, then that link
+#is displayed as a hyperlink, so that it will be clickable
 @app.template_filter('autolink')
 def autolink(s):
-    # Regular expression to find URLs in the string
+    #this regular expression finds links that may have been posted
     regex = r'https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+'
 
-    # Replace URLs with clickable links
+    #here, we are replacing the original link with a clickable link
     return re.sub(regex, r'<a href="\g<0>" target="_blank">\g<0></a>', s)
 
 
@@ -257,17 +247,15 @@ def add_a_comment():
 
     return redirect('/read_stats.html')
 
+
 # this route gets the python.html template
-
-
 @app.route('/python.html')
 def get_python():
     filename = request.args.get('filename')
     return render_template('python.html', filename=filename, username=session.get('username'))
 
+
 # this route gets the linux.html template
-
-
 @app.route('/linux.html')
 def get_linux():
     filename = request.args.get('filename')
@@ -288,11 +276,7 @@ def get_frontend():
     return render_template('frontend.html', filename=filename, username=session.get('username'))
 
 
-
-
 #this route handles user uploading profile picture
-
-
 @app.route('/upload', methods=['POST'])
 def upload():
     if 'username' in session:
@@ -303,16 +287,16 @@ def upload():
         filename = secure_filename(file.filename)
 
         uploaded_files = os.listdir(app.config['UPLOAD_FOLDER'])
-        for existing_file in uploaded_files:
-            if existing_file.startswith(username):
-                os.remove(os.path.join(app.config['UPLOAD_FOLDER'], existing_file))
+        for exist_file in uploaded_files:
+            if exist_file.startswith(username):
+                os.remove(os.path.join(app.config['UPLOAD_FOLDER'], exist_file))
                 break
 
         # Renaming the file with the username(naming convention to map usernames to their profile pics)
-        new_filename = f"{username}_{filename}"
+        filename1 = f"{username}_{filename}"
 
         # Saving the uploaded file
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], new_filename))
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename1))
 
         return redirect('/form')
     return redirect('/')
@@ -320,9 +304,9 @@ def upload():
 
 #a filter to search for the right image based on the username prefix
 @app.template_filter('find_user')
-def find_user(uploaded_files, username_prefix):
+def find_user(uploaded_files, username):
     for item in uploaded_files:
-        if item.startswith(username_prefix):
+        if item.startswith(username):
             return item
     return None
 
