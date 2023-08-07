@@ -274,6 +274,22 @@ def get_linux():
     return render_template('linux.html', filename=filename, username=session.get('username'))
 
 
+#this route gets the git template
+@app.route('/git.html')
+def get_git():
+    filename = request.args.get('filename')
+    return render_template('git.html', filename=filename, username=session.get('username'))
+
+
+#this route gets the frontend template
+@app.route('/frontend.html')
+def get_frontend():
+    filename = request.args.get('filename')
+    return render_template('frontend.html', filename=filename, username=session.get('username'))
+
+
+
+
 #this route handles user uploading profile picture
 
 
@@ -310,6 +326,11 @@ def find_user(uploaded_files, username_prefix):
             return item
     return None
 
+
+#route that redirects to form route
+@app.route('/form.html')
+def form_redirect():
+    return redirect('/form')
 
 
 if __name__ == '__main__':
