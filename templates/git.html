@@ -1,101 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>resourcehub</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
-      crossorigin="anonymous" />
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-      crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../static/css/python.css" />
-    <script src="../static/js/main.js"></script>
-  </head>
-  <body>
-    <header>
-      <a href="./form.html"><h3>Resourcehub</h3></a>
-        <nav>
-            <a href="./read_stats.html?filename={{filename}}">community</a>
-            <a href="/logout">logout</a>
-            <div class = user onclick="toggleProfile()">
-                {{username}}
-                <div class = pic>
-                    <img src='../static/uploads/{{filename}}'>
-                </div>
+    <head>
+        <title>resourcehub</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+        <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+        crossorigin="anonymous" />
+        <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="../static/css/git.css" />
+        <script src="../static/js/main.js"></script>
+    </head>
+    <body>
+        <header>
+            <a href="./form.html"><h3>Resourcehub</h3></a>
+                <nav>
+                    <a href="./read_stats.html?filename={{filename}}">community</a>
+                    <a href="/logout">logout</a>
+                    <div class = user onclick="toggleProfile()">
+                        {{username}}
+                        <div class = pic>
+                            <img src='../static/uploads/{{filename}}'>
+                        </div>
+                    </div>
+                </nav> 
+                <div class = profile-pic>
+                    <h3>Upload profile picture</h3>
+                    <form action="/upload" method="post" enctype="multipart/form-data">
+                        <div class = q>
+                            <input type="file" name="file" id="file" accept="image/jpeg, image/jpg, image/png, image/gif" required>
+                            <div class = can onclick="clearFile()">X</div>
+                        </div>
+                        <input type="submit" value="Upload" id="submit-pic">
+                    </form>
+                </div> 
+        </header>
+        <div class = big-container>
+            {% for resource in resource_list %}
+                <div class = resource>
+                    <div class = hea>
+                        <div class = ti>{{resource[3]}}</div>
+                        {% if resource[6] is not none %}
+                            <div class = ra>rating: {{resource[6]}}/5</div>
+                        {% endif %}    
+                    </div>
+                    <div class = desc>{{resource[4]}}</div>
+                    <div class = link><a href='{{resource[5]}}'>Check out</a></div>
+                    {%if username in admin_list %}
+                        <a href="/delete_resource?resource_id={{resource[0]}}" class = del>
+                            <img src="../static/images/dustbin1.png" height="14px" width="12px">
+                            delete
+                        </a>
+                    {% endif %}
+                    <h5 class = how>How helpful was this resource?</h5>
+                    <button class="rate_pop" onclick="toggleRateForm('{{ resource[0] }}')">Rate</button> 
+                    <div class = feedback id="rate-form-{{ resource[0] }}">
+                        <form action="/rating" method='POST' class="feed_form">
+                            <input type="hidden" name="resource_id" value="{{ resource[0] }}">
+                            <input type="hidden" name="user" value= '{{ username }}'>
+                            <div class="radio_0">
+                                <label for="0">Horrible</label>
+                                <input type="radio" name="rating" value="0" required>
+                            </div>
+                            <div class="radio_0">
+                                <label for="1">Terrible</label>
+                                <input type="radio" name="rating" value="1">
+                            </div>
+                            <div class="radio_0">
+                                <label for="2">Not bad</label>
+                                <input type="radio" name="rating" value="2">
+                            </div>
+                            <div class="radio_0">
+                                <label for="3">Neutral</label>
+                                <input type="radio" name="rating" value="3">
+                            </div>
+                            <div class="radio_0">
+                                <label for="4">Helpful</label>
+                                <input type="radio" name="rating" value="4">
+                            </div>
+                            <div class="radio_0">
+                                <label for="5">Excellent</label>
+                                <input type="radio" name="rating" value="5">
+                            </div>
+                            <input type="submit" value="Rate us" id="submit_rating">
+                        </form>
+                    </div> 
+                    <div class = topic>#{{resource[2]}}</div> 
+                </div> 
+            {% endfor %} 
+        </div>
+        <footer>
+            <div class = footer_div>
+                <h4>Contact us</h4>
+                <a href="#"><img src="../static/images/instagram.png" width="16px" height="16px"></a>
+                <a href="#"><img src="../static/images/facebook.png" width="16px" height="16px"></a>
+                <a href="#"><img src="../static/images/twitter.png" width="16px" height="16px"></a>
             </div>
-        </nav> 
-        <div class = profile-pic>
-            <h3>Upload profile picture</h3>
-            <form action="/upload" method="post" enctype="multipart/form-data">
-                <div class = q>
-                    <input type="file" name="file" id="file" accept="image/jpeg, image/jpg, image/png, image/gif" required>
-                    <div class = can onclick="clearFile()">X</div>
-                </div>
-                <input type="submit" value="Upload" id="submit-pic">
-            </form>
-        </div> 
-    </header>
-    <div class="big-container">
-      <div class="px-4 py-3 my-3 text-start container-1">
-        <h3 class="display-5 fw-bold ">FireBase on Git</h3>
-        <div class="mx-auto">
-          <p class=" mb-4">
-            One of our favorate youtubers. He'll give you a resourcesfull
-            intro but won't scare you away. 
-            With this, you can venture into deeper resources with confidence.
-
-          </p>
-          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-            <button type="button" class="btn btn-success btn-lg px-4 gap-3">
-              <a
-                href="https://www.youtube.com/watch?v=HkdAHXoRtos"
-                >Check out</a
-              >
-            </button>
-          </div>
-        </div>
-      </div>
-      <div class="px-4 py-3 my-3 text-start container-1">
-        <h3 class="display-5 fw-bold">Github Commands Repo (Just in case)</h3>
-        <div class="mx-auto">
-          <p class=" mb-4">
-            We all forget these when we just started.
-            Hopefully you won't need this next week anymore.
-          </p>
-          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-            <button type="button" class="btn btn-success btn-lg px-4 gap-3">
-              <a
-                href="https://gist.github.com/gwenf/19e5748a5391929e8e938a22c8a4b3f2"
-                >Check out</a
-              >
-            </button>
-          </div>
-        </div>
-      </div>
-      <div class="px-4 py-3 my-3 text-start container-1">
-        <h3 class="display-5 fw-bold">FreeCodeCamp</h3>
-        <div class="mx-auto">
-          <p class=" mb-4">
-            Everything you need to know about Git and Github as you start.
-          </p>
-          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-            <button type="button" class="btn btn-success btn-lg px-4 gap-3">
-              <a
-                href="https://www.youtube.com/watch?v=RGOj5yH7evk"
-                >Check out</a
-              >
-            </button>
-          </div>
-        </div>
-      </div>
-  </div>
-  </body>
+            <div class="copyright"><h6>&copy;resourcehub 2023</h6></div>
+        </footer>  
+    </body>
 </html>

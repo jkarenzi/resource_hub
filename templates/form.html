@@ -12,6 +12,9 @@
         <header>
             <h3>Resourcehub</h3>
             <nav>
+                {% if username in admin_list %}
+                    <a href="./admin.html?filename={{filename}}">admin</a>
+                {% endif %}
                 <a href="./read_stats.html?filename={{filename}}">community</a>
                 <a href="/logout">logout</a>
                 <div class = user onclick="toggleProfile()">
@@ -94,10 +97,13 @@
             </div>   
         </div>
         <footer>
-            <h4>Contact us</h4>
-            <a href="#"><img src="../static/images/instagram.png" width="16px" height="16px"></a>
-            <a href="#"><img src="../static/images/facebook.png" width="16px" height="16px"></a>
-            <a href="#"><img src="../static/images/twitter.png" width="16px" height="16px"></a>
-        </footer>
+            <div class = footer_div>
+                <h4>Contact us</h4>
+                <a href="#"><img src="../static/images/instagram.png" width="16px" height="16px"></a>
+                <a href="#"><img src="../static/images/facebook.png" width="16px" height="16px"></a>
+                <a href="#"><img src="../static/images/twitter.png" width="16px" height="16px"></a>
+            </div>
+            <div class="copyright"><h6>&copy;resourcehub 2023</h6></div>
+        </footer>  
     </body>
 </html>
