@@ -7,6 +7,7 @@ body {
     justify-content: space-between;
     display: flex;
     flex-direction: column;
+    min-height: 100vh;
 }
 
 .container1 {
@@ -125,9 +126,10 @@ header h3{
 }
 
 nav {
-    width: 17rem;
+    width: 22rem;
     display: flex;
     align-items: center;
+    justify-content: flex-end;
 }
 
 header a{
@@ -172,6 +174,7 @@ footer{
     background-color: white;
     height: 5rem;
     align-items: center;
+    justify-content: space-between;
 }
 
 footer h4{
@@ -331,4 +334,17 @@ footer a{
     height: 6rem;
     align-items: center;
     margin-bottom: 0.3rem;
+}
+
+.footer_div {
+    display: flex;
+    align-items: center;
+}
+
+.copyright {
+    margin-right: 1rem;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    margin-top: 0.2rem;
 }

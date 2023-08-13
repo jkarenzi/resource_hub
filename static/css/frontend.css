@@ -161,8 +161,8 @@ header a:hover{
     padding: 1rem;
     width: 50rem;
     min-height: 4rem;
-    box-shadow: 2px 4px 5px lightgrey;
     border: 1px solid lightgrey;
+    box-shadow: 2px 4px 5px lightgrey;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -190,6 +190,7 @@ header a:hover{
 .topic {
     display: flex;
     width: 100%;
+    margin-top: 2rem;
 }
 
 .ti {
@@ -213,6 +214,7 @@ header a:hover{
     font-size: small;
     display: flex;
     align-items: center;
+    margin-top: 2rem;
 }
 
 .del img{
