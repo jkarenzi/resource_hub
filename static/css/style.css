@@ -4,6 +4,44 @@ body {
     font-family: 'Poppins', sans-serif;
     background-color: #f2f2f2;
     color: black;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+
+footer{
+    display: flex;
+    border-top: 1px solid grey;
+    background-color: white;
+    height: 5rem;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+footer h4{
+    font-weight: 500;
+    margin-left: 2rem;
+}
+
+footer a{
+    margin-left: 1rem;
+    margin-top: 0.4rem;
+}
+
+.footer_div {
+    display: flex;
+    align-items: center;
+}
+
+.copyright {
+    margin-right: 1rem;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    margin-top: 0.2rem;
 }
 
 .container {
@@ -187,13 +225,14 @@ header{
     background-color: white;
     border-bottom: 2px solid white;
     height: 5rem;
+    width: 100%;
     box-shadow: 2px 4px 5px lightgrey;
 }
 
 header h3{
-    font-weight: 600;
-    font-size: x-large;
-    font-family: cursive;
+    font-weight: 400;
+    font-size: xx-large;
+    font-family: 'Dancing Script', cursive;
     margin-left: 1rem;
     color: green;
 }
@@ -360,4 +399,77 @@ header a:hover{
 .no_match {
     color: black;
     font-size: larger;
+}
+
+.search_icon {
+    display: none;
+    cursor: pointer;
+    margin-left: 1rem;
+}
+
+.cancel-search {
+    display: none;
+    cursor: pointer;
+    position: absolute;
+    top: 1.3rem;
+    left: 0.5rem;
+    font-size: x-large;
+}
+
+
+@media (max-width: 768px) {
+    .footer_div {
+        flex-wrap: wrap;
+        width: 7rem;
+        height: 3rem;
+    }
+
+    footer a {
+        margin-top: -1.2rem;
+    }
+
+    footer h4 {
+        margin-left: 1rem;
+        font-size: small;
+        margin-top: -0.1rem;
+    }
+
+    footer h6 {
+        font-size: small;
+    }
+
+    .container {
+        width: 80%;
+        margin-left: 1rem;
+    }
+
+    .posts{
+        width: 80%;
+        margin-left: 1rem;
+        margin-top: 1rem;
+    }
+
+    .post {
+        width: 100%;
+    }
+
+    .comm {
+        width: 100%;
+    }
+
+    .search_icon {
+        display: flex;
+    }
+
+    .searchbar {
+        display: none;
+        position: absolute;
+        top: 1.5rem;
+        right: 1rem;
+        width: 80%;
+    }
+
+    header h3 {
+        font-size: x-large;
+    }
 }

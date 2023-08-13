@@ -6,7 +6,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 37.5rem;
+    height: 100vh;
 }
 
 .container {
@@ -76,4 +76,66 @@ body {
 .error{
     color: red;
     text-align: center;
+}
+
+.login {
+    color: green;
+    width: 15rem;
+    height: 2rem;
+    background-color: white;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-c {
+    width: 100%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -1rem;
+    top: 31vh;
+    left: 0rem;
+}
+
+.fade-out {
+    animation: fadeOut 5s forwards;
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 20rem;
+        height: 26.5rem;
+    }
+
+    #submit{
+        width: 10rem;
+        margin-left: 4.8rem; 
+        border-radius: 30px; 
+        font-weight: bold;
+        margin-top: 0;
+    }
+
+    #username{
+        width: 14rem;
+    }
+
+    #password{
+        width: 14rem;
+    }
+
+    .us,.pa{
+        margin-left: 2.5rem;
+    }
 }

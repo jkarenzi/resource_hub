@@ -1,6 +1,7 @@
-from flask import Flask, render_template, request, session, redirect
+from flask import Flask, flash, render_template, request, session, redirect
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
+from datetime import timedelta
 import os
 import pymysql
 import re
@@ -8,6 +9,7 @@ import re
 app = Flask(__name__)
 app.secret_key = 'kmj123456789'
 app.config['UPLOAD_FOLDER'] = os.path.join(app.root_path, 'static', 'uploads')
+app.permanent_session_lifetime = timedelta(minutes=30)
 
 
 # this  route handles a get request for user posts
@@ -108,7 +110,7 @@ def auth():
 
     cursor = connection.cursor()
 
-    sql_query = "SELECT username, password FROM credentials"
+    sql_query = "SELECT username, password, admin FROM credentials"
     cursor.execute(sql_query)
     results = cursor.fetchall()
     connection.close()
@@ -116,9 +118,13 @@ def auth():
     for row in results:
         user_name = row[0]
         pass_word = row[1]
+        admin_status = row[2]
         if user_name == username and check_password_hash(pass_word, password):
+            session.permanent = True
             session['username'] = username
-            return redirect(f'/form?username={username}')
+            session['admin_status'] = admin_status
+            flash("Login successful", "login")
+            return redirect('/form')
 
     error_message = "Invalid credentials"
     return render_template('login.html', error_message=error_message)
@@ -130,6 +136,7 @@ def form():
     if 'username' in session:
         username = session.get('username')
         uploaded_files = os.listdir(app.config['UPLOAD_FOLDER'])
+        admin_status = session.get('admin_status')
         
         #searching the uploaded_files list for a picture that corresponds with the current username
         user_file = None
@@ -139,8 +146,8 @@ def form():
                 break
 
         if user_file is None:
-            return render_template('form.html', filename='person.png', username=username)
-        return render_template('form.html', username=username, filename=user_file)
+            return render_template('form.html', filename='person.png', username=username, admin_status=admin_status)
+        return render_template('form.html', username=username, filename=user_file, admin_status=admin_status)
     return redirect('/')
 
 
@@ -178,7 +185,7 @@ def auth1():
     cursor.execute(sql_query, (username, hashed_password))
     connection.commit()
     connection.close()
-
+    flash("Signup successful", "signup")
     return redirect('/')
 
 
@@ -210,7 +217,8 @@ def delete():
 # this route logs out the user
 @app.route('/logout')
 def logout():
-    session.pop('username', None)
+    session.clear()
+    flash("You've been logged out", "logout")
     return redirect('/')
 
 
@@ -251,30 +259,98 @@ def add_a_comment():
 # this route gets the python.html template
 @app.route('/python.html')
 def get_python():
-    filename = request.args.get('filename')
-    return render_template('python.html', filename=filename, username=session.get('username'))
+    if 'username' in session:
+        filename = request.args.get('filename')
+        
+        connection = pymysql.connect(
+            host='54.82.71.184',
+            user='karenzi',
+            password='@Karenzijoslyn46',
+            database='posts'
+        )
 
+        cursor = connection.cursor()
+
+        sql_query = "SELECT * FROM resources WHERE topic = %s ORDER BY avg_rating DESC, id DESC"
+        topic_name = 'python'
+        cursor.execute(sql_query,(topic_name,))
+        resource_list = cursor.fetchall()
+        connection.close()
+
+        return render_template('python.html', filename=filename, admin_status=session.get('admin_status'), resource_list=resource_list, username=session.get('username'))
+    return redirect('/')
 
 # this route gets the linux.html template
 @app.route('/linux.html')
 def get_linux():
-    filename = request.args.get('filename')
-    return render_template('linux.html', filename=filename, username=session.get('username'))
+    if 'username' in session:
+        filename = request.args.get('filename')
+        
+        connection = pymysql.connect(
+            host='54.82.71.184',
+            user='karenzi',
+            password='@Karenzijoslyn46',
+            database='posts'
+        )
 
+        cursor = connection.cursor()
+
+        sql_query = "SELECT * FROM resources WHERE topic = %s ORDER BY avg_rating DESC, id DESC"
+        topic_name = 'shell scripting'
+        cursor.execute(sql_query,(topic_name,))
+        resource_list = cursor.fetchall()
+        connection.close()
+
+        return render_template('linux.html', filename=filename, admin_status=session.get('admin_status'), resource_list=resource_list, username=session.get('username'))
+    return redirect('/')
 
 #this route gets the git template
 @app.route('/git.html')
 def get_git():
-    filename = request.args.get('filename')
-    return render_template('git.html', filename=filename, username=session.get('username'))
+    if 'username' in session:
+        filename = request.args.get('filename')
+        
+        connection = pymysql.connect(
+            host='54.82.71.184',
+            user='karenzi',
+            password='@Karenzijoslyn46',
+            database='posts'
+        )
 
+        cursor = connection.cursor()
+
+        sql_query = "SELECT * FROM resources WHERE topic = %s ORDER BY avg_rating DESC, id DESC"
+        topic_name = 'git'
+        cursor.execute(sql_query,(topic_name,))
+        resource_list = cursor.fetchall()
+        connection.close()
+
+        return render_template('git.html', filename=filename, admin_status=session.get('admin_status'), resource_list=resource_list, username=session.get('username'))
+    return redirect('/')
 
 #this route gets the frontend template
 @app.route('/frontend.html')
 def get_frontend():
-    filename = request.args.get('filename')
-    return render_template('frontend.html', filename=filename, username=session.get('username'))
+    if 'username' in session:
+        filename = request.args.get('filename')
+        
+        connection = pymysql.connect(
+            host='54.82.71.184',
+            user='karenzi',
+            password='@Karenzijoslyn46',
+            database='posts'
+        )
 
+        cursor = connection.cursor()
+
+        sql_query = "SELECT * FROM resources WHERE topic = %s ORDER BY avg_rating DESC, id DESC"
+        topic_name = 'frontend development'
+        cursor.execute(sql_query,(topic_name,))
+        resource_list = cursor.fetchall()
+        connection.close()
+
+        return render_template('frontend.html', filename=filename, admin_status=session.get('admin_status'), resource_list=resource_list, username=session.get('username'))
+    return redirect('/')
 
 #this route handles user uploading profile picture
 @app.route('/upload', methods=['POST'])
@@ -315,6 +391,170 @@ def find_user(uploaded_files, username):
 @app.route('/form.html')
 def form_redirect():
     return redirect('/form')
+
+
+#route that gets admin.html page
+@app.route('/admin.html')
+def get_admin():
+    if 'username' not in session:
+        return redirect('/')
+    
+    if session['admin_status']:
+        user = session.get('username')
+        user_file = None
+        uploaded_files = os.listdir(app.config['UPLOAD_FOLDER'])
+
+        for file in uploaded_files:
+            if file.startswith(user):
+                user_file = file
+                break
+
+        if user_file is None:
+            filename = 'person.png'
+        else:
+            filename = user_file  
+        return render_template('admin.html', filename=filename, username = session.get('username'))
+    return "PLZ LOG IN WITH ADMIN ACCOUNT TO ACCESS THIS ROUTE"
+
+
+#route that handles posting of resources
+@app.route('/admin', methods=['POST'])
+def add_resource():
+    user = session.get('username')
+    topic = request.form.get('topic')
+    title = request.form.get('title')
+    description = request.form.get('description')
+    the_link = request.form.get('the_link')
+
+    connection = pymysql.connect(
+        host='54.82.71.184',
+        user='karenzi',
+        password='@Karenzijoslyn46',
+        database='posts'
+    )
+
+    cursor = connection.cursor()
+
+    sql_query = "INSERT INTO resources (user, topic, title, description, the_link) VALUES (%s, %s, %s, %s, %s)"
+    cursor.execute(sql_query, (user, topic, title, description, the_link))
+    connection.commit()
+    connection.close()
+    flash("Resource successfully added", "add")
+
+    return redirect('/admin.html')
+
+
+#route that handles deleting resources
+@app.route('/delete_resource')
+def del_resource():
+    if 'username' in session and session['admin_status']:
+        resource_id = request.args.get('resource_id', type=int)
+
+        connection = pymysql.connect(
+            host='54.82.71.184',
+            user='karenzi',
+            password='@Karenzijoslyn46',
+            database='posts'
+        )
+        cursor = connection.cursor()
+
+        sql_query = 'DELETE FROM resources WHERE id = %s'
+        cursor.execute(sql_query, (resource_id,))
+        connection.commit()
+        connection.close()
+        flash("Resource successfully deleted", "delete")
+
+        return redirect('/form')
+
+    else:
+        return redirect('/')
+
+
+#this route calculates avg rating and stores it in db
+@app.route('/rating', methods=['POST'])
+def rating():
+    if 'username' in session:
+        rating = int(request.form.get('rating'))
+        resource_id = int(request.form.get('resource_id'))
+        user = request.form.get('user')
+
+        connection = pymysql.connect(
+            host='54.82.71.184',
+            user='karenzi',
+            password='@Karenzijoslyn46',
+            database='posts'
+        )
+
+        cursor = connection.cursor()
+
+        sql_query3 = 'SELECT user FROM ratings WHERE resource_id = %s'
+        cursor.execute(sql_query3, (resource_id,))
+        user_list = cursor.fetchall()
+        for name in user_list:
+            if name[0] == user:
+                flash("You've rated this resource before", "rate1")
+                return redirect('/form')
+
+        sql_query = 'INSERT INTO ratings (resource_id, user, rating) VALUES (%s, %s, %s)'
+        cursor.execute(sql_query, (resource_id, user, rating))
+        connection.commit()
+
+        sql_query1 = 'SELECT rating FROM ratings WHERE resource_id = %s'
+        cursor.execute(sql_query1, (resource_id,))
+        rating_list = cursor.fetchall()
+        sum = 0
+        total_ratings = len(rating_list)
+        for num in rating_list:
+            num = int(num[0])
+            sum += num
+        avg_rating = round(sum / total_ratings, 1)
+
+        sql_query2 = 'UPDATE resources SET avg_rating = %s WHERE id = %s'
+        cursor.execute(sql_query2, (avg_rating, resource_id))
+        connection.commit()
+
+        connection.close()
+        flash("Thank you! your feedback is valued", "rate")
+        return redirect('/form')
+    
+    return redirect('/')    
+
+
+#this route handles granting of admin privileges
+@app.route('/add_admin', methods=['POST'])
+def add_admin():
+    admin_account = request.form.get('admin_account')
+
+    connection = pymysql.connect(
+        host='54.82.71.184',
+        user='karenzi',
+        password='@Karenzijoslyn46',
+        database='resourcehub_users'
+    )
+
+    cursor = connection.cursor()
+
+    sql_query = "SELECT username, admin FROM credentials"
+    cursor.execute(sql_query)
+    all_accounts = cursor.fetchall()
+
+    for row in all_accounts:
+        if admin_account in row:
+            if row[1]:
+                flash("&#9888; Account already admin", 'admin')
+                return redirect('/admin.html')
+            else:
+                sql_query1 = "UPDATE credentials SET admin = %s WHERE username = %s"  
+                value = 1
+                cursor.execute(sql_query1, (value, admin_account))
+                connection.commit()
+                connection.close()
+                flash("Account type changed to admin", 'admin1') 
+                return redirect('/admin.html')
+        else:
+            pass   
+    flash("&#9888; Account doesn't exist", "admin")
+    return redirect('/admin.html')     
 
 
 if __name__ == '__main__':

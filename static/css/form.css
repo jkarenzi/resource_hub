@@ -7,6 +7,7 @@ body {
     justify-content: space-between;
     display: flex;
     flex-direction: column;
+    min-height: 100vh;
 }
 
 .container1 {
@@ -44,6 +45,7 @@ body {
     font-weight: 300;
     margin-left: 2rem;
     margin-top: -1rem;
+    margin-right: 1.5rem;
 }
 
 .pyd1 {
@@ -51,6 +53,7 @@ body {
     font-weight: 300;
     margin-left: 2rem;
     margin-top: -1rem;
+    margin-right: 1.5rem;
 }
 
 .container1 h3{
@@ -117,17 +120,18 @@ header{
 }
 
 header h3{
-    font-weight: 600;
-    font-size: x-large;
-    font-family: cursive;
+    font-weight: 400;
+    font-size: xx-large;
+    font-family: 'Dancing Script', cursive;
     margin-left: 1rem;
     color: green;
 }
 
 nav {
-    width: 17rem;
+    width: 22rem;
     display: flex;
     align-items: center;
+    justify-content: flex-end;
 }
 
 header a{
@@ -172,6 +176,7 @@ footer{
     background-color: white;
     height: 5rem;
     align-items: center;
+    justify-content: space-between;
 }
 
 footer h4{
@@ -331,4 +336,188 @@ footer a{
     height: 6rem;
     align-items: center;
     margin-bottom: 0.3rem;
+}
+
+.footer_div {
+    display: flex;
+    align-items: center;
+}
+
+.copyright {
+    margin-right: 1rem;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    margin-top: 0.2rem;
+}
+
+.login {
+    color: green;
+    min-width: 20rem;
+    height: 2rem;
+    background-color: white;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-c {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    height: 2rem;
+    position: absolute;
+    top: 4.5rem;
+}
+
+
+.fade-out {
+    animation: fadeOut 7s forwards;
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+/* responsiveness*/
+.hide {
+    display: flex;
+}
+
+.hamburger {
+    display:flex;
+    flex-direction: column;
+}
+
+.line {
+    width: 1.5625rem;
+    height: 0.125rem;
+    background-color: black;
+    margin-top: 0.1875rem;
+}
+
+.menu-toggle { 
+    margin-right: 5rem;
+    cursor: pointer;
+    display: none;
+}
+
+.drop {
+    position: absolute;
+    display: none;
+    top: 5rem;
+    width: 100%;
+    min-height: 3rem;
+    background: white;
+    box-shadow: 2px 4px 5px lightgrey;
+    border-top: 1px solid lightgrey;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.drop a {
+    border-bottom: 1px solid lightgrey;
+    width: 105%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 2.5rem;
+}
+
+@media (max-width: 768px) {
+    .menu-toggle { 
+        display: block;
+        margin-left: 1rem;
+    }
+
+    .hide {
+        display: none;
+    }
+
+    nav {
+        width: 8rem;
+    }
+
+    header h3 {
+        margin-left: -2rem;
+    }
+
+    .big-container {
+        flex-direction: column;
+        margin-bottom: 1rem;
+    }
+
+    .container1{
+        height: 32rem;
+        width: 90%;
+        margin-bottom: 1rem;
+    }
+
+    .container2{
+        height: 33rem;
+        width: 90%;
+        margin-left: 0;
+    }
+
+    .container3{
+        height: 32rem;
+        width: 90%;
+        margin-bottom: 1rem;
+    }
+
+    .container4{
+        height: 32rem;
+        width: 90%;
+        margin-left: 0;
+    }
+
+    .py {
+        margin-top: 1rem;
+
+    }
+
+    .big-container1 {
+        flex-direction: column;
+    }
+
+    .container4 .py {
+        width: 80%;
+        margin-left: 2rem;
+    }
+
+    .container4 img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .footer_div {
+        flex-wrap: wrap;
+        width: 7rem;
+        height: 3rem;
+    }
+
+    footer a {
+        margin-top: -1.2rem;
+    }
+
+    footer h4 {
+        margin-left: 1rem;
+        font-size: small;
+        margin-top: -0.1rem;
+    }
+
+    footer h6 {
+        font-size: small;
+    }
+
+    header h3 {
+        font-size: x-large;
+    }
 }

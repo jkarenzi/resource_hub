@@ -11,7 +11,14 @@
         <div class = container>
             <form action="/login" method="POST">
                 <h3>Login</h3>
-                <p class = error>{{error_message}}</p>
+                <p class = error>{{error_message}}</p>   
+                <div class="login-c">
+                    {% with messages = get_flashed_messages(category_filter=["signup","logout"]) %}
+                        {% if messages %}
+                            <p class="login fade-out">{{ messages[0] }}</p>
+                        {% endif %}
+                    {% endwith %}
+                </div>
                 <div class = us>
                     <label for= username>Username</label>
                     <input type="text" id="username" name="username" required><br><br>

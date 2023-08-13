@@ -31,6 +31,19 @@ footer a{
     margin-bottom: 0.3rem;
 }
 
+.footer_div {
+    display: flex;
+    align-items: center;
+}
+
+.copyright {
+    margin-right: 1rem;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    margin-top: 0.2rem;
+}
+
 header{
     display: flex;
     justify-content: space-between;
@@ -148,171 +161,164 @@ header a:hover{
     align-items: center;
 }
 
-.big-container {
-    width: 100%;
-    margin-top: 2rem;
+.container {
     display: flex;
     flex-direction: column;
-    align-items: center;
-}
-
-.resource {
-    background: #ffffff;
+    border: 3px solid white;
+    width: 90%;
+    background-color: white;
     padding: 1rem;
-    width: 50rem;
-    min-height: 4rem;
-    box-shadow: 2px 4px 5px lightgrey;
-    border: 1px solid lightgrey;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    margin-left: 2rem;
+    box-shadow: 2px 4px 10px lightgrey;
+}
+
+.title {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    margin-bottom: 2rem;
-}
-
-.link {
-    width: 100%;
-    display: flex;
-    justify-content: center;
     margin-top: 1rem;
-    margin-bottom: 2rem;
 }
 
-.link a{
-    border-radius: 6px;
-    width: 8rem;
-    height: 2.5rem;
+.content {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    color: white;
-    background-color: green;
+    flex-direction: column;
+    margin-top: 1rem;
+}
+
+.the_link {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
 }
 
 .topic {
     display: flex;
-    width: 100%;
-    margin-top: 1rem;
+    flex-direction: column;
 }
 
-.ti {
-    display: flex;
-    justify-content: flex-start;
-    width: 30rem;
-    font-size:xx-large;
-    font-weight: bolder;
+#topic{
+    height:1.5rem;
+    border: 1px solid grey;
 }
 
-.new {
-    display: flex;
-    justify-content: space-between;
-    width: 10rem;
+#title{
+    height:1.5rem;
+    border: 1px solid grey;
 }
 
-.del{
+#content{
+    height: 4rem;
+    border: 1px solid grey;
+}
+
+#the_link {
+    height:1.5rem;
+    border: 1px solid grey;
+}
+
+#post{
     background: green;
     border: 1px solid green;
     color: white;
-    width: 4.5rem;
-    height: 1.5rem;
+    margin-top: 1rem;
+    width: 4rem;
+    height: 1.8rem;
     cursor: pointer;
     border-radius: 0.3rem;
-    text-decoration: none;
-    font-size: small;
-    display: flex;
-    align-items: center;
-}
-
-.del img{
-    margin-left: 0.3rem;
-    margin-right: 0.2rem;
-    margin-bottom: 0.1rem;
-}
-
-.footer_div {
-    display: flex;
-    align-items: center;
-}
-
-.copyright {
-    margin-right: 1rem;
-    font-weight: 400;
-    display: flex;
-    align-items: center;
-    margin-top: 0.2rem;
-}
-
-.feedback {
-    margin-top: 1rem;
-    display: none;
-}
-
-.rate_pop {
-    width: 4rem;
-    height: 1.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: green;
-    color: white;
-    border-radius: 6px;
-    border: none;
-}
-
-.radio_0 {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.feed_form {
-    display: flex;
-    border: 1px  solid lightgrey;
-    justify-content: space-around;
-    width: 100%;
-    height: 3rem;
-    background: white;
-    box-shadow: 2px 4px 5px lightgrey;
-}
-
-#submit_rating {
-    background: green;
-    color: white;
-    height: 2rem;
-    width: 5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 6px;
-    margin-top: 0.5rem;
-    border: none;
-}
-
-.how {
-    font-size: medium;
-    font-weight: 400;
-}
-
-.hea {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 0.5rem;
-}
-
-.ra {
-    width: 10rem;
-    display: flex;
-    justify-content: center;
-    font-weight: 600;
-    font-size: x-large;
-    color: green;
 }
 
 .q {
     display: flex;
     align-items: center;
+}
+
+.login {
+    color: green;
+    min-width: 20rem;
+    height: 2rem;
+    background-color: #f2f2f2;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.error {
+    color: red;
+    min-width: 20rem;
+    height: 2rem;
+    background-color: #f2f2f2;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-c {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 8rem;
+}
+
+.fade-out {
+    animation: fadeOut 10s forwards;
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+
+.container_1 {
+    display: flex;
+    flex-direction: column;
+    border: 3px solid white;
+    width: 50%;
+    background-color: white;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    margin-left: 2rem;
+    box-shadow: 2px 4px 10px lightgrey;
+}
+
+#make_admin {
+    background: green;
+    border: 1px solid green;
+    color: white;
+    margin-top: 1rem;
+    width: 8rem;
+    height: 1.8rem;
+    cursor: pointer;
+    border-radius: 0.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.admin_account {
+    width: 20rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 3.2rem;
+}
+
+#admin_account {
+    width: 15rem;
+    height: 1.5rem;
+    border: 1px solid grey;
 }
 
 /* responsiveness*/
@@ -333,7 +339,7 @@ header a:hover{
 }
 
 .menu-toggle { 
-    margin-right: 2.5rem;
+    margin-right: 2rem;
     cursor: pointer;
     display: none;
 }
@@ -380,24 +386,14 @@ header a:hover{
         margin-top: 0.2rem;
     }
 
-    .resource {
-        width:20rem;
+    .container {
+        width: 90%;
+        margin-left: 1rem;
     }
 
-    .ti {
-        font-size: larger;
-    }
-
-    .ra {
-        font-size: larger;
-    }
-
-    .desc {
-        font-size: medium;
-    }
-
-    .how {
-        font-size: medium;
+    .container_1 {
+        width: 90%;
+        margin-left: 1rem;
     }
 
     .footer_div {

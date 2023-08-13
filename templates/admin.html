@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>resourcehub</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous" />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+      crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../static/css/admin.css" />
+    <script src="../static/js/main.js"></script>
+  </head>
+  <body>
+    <header>
+        <div class = menu-toggle onclick = 'myFun()'>
+            <div class = hamburger>
+                <div class = line></div>
+                <div class = line></div>
+                <div class = line></div>
+            </div>
+        </div>
+        <a href="./form.html"><h3>Resourcehub</h3></a>
+        <div class = drop>
+            <a href="./read_stats.html?filename={{filename}}">community</a>
+            <a href="/logout">logout</a>
+        </div>
+        <nav>
+            <div class = hide>
+                <a href="./read_stats.html?filename={{filename}}">community</a>
+                <a href="/logout">logout</a>
+            </div>
+            <div class = user onclick="toggleProfile()">
+                {{username}}
+                <div class = pic>
+                    <img src='../static/uploads/{{filename}}'>
+                </div>
+            </div>
+        </nav> 
+        <div class = profile-pic>
+            <h3>Upload profile picture</h3>
+            <form action="/upload" method="post" enctype="multipart/form-data">
+                <div class = q>
+                    <input type="file" name="file" id="file" accept="image/jpeg, image/jpg, image/png, image/gif" required>
+                    <div class = can onclick="clearFile()">X</div>
+                </div>
+                <input type="submit" value="Upload" id="submit-pic">
+            </form>
+        </div> 
+    </header>
+    <div class="login-c">
+        {% with messages = get_flashed_messages(category_filter=["add","admin","admin1"]) %}
+            {% if messages %}
+                {% if '&#9888;' in messages[0] %}
+                    <p class="error fade-out">{{ messages[0] | safe }}</p>
+                {% else %}
+                    <p class="login fade-out">{{ messages[0] }}</p>    
+                {% endif %}    
+            {% endif %}
+        {% endwith %}
+    </div>
+    <div class = container>
+        <h3>Add a resource</h3>
+        <form action="/admin" method="POST">
+            <select name="topic" id="topic" required>
+                <option value="" disabled selected>Select Topic</option>
+                <option value="python">Python</option>
+                <option value="shell scripting">Shell Scripting</option>
+                <option value="frontend development">Frontend Development</option>
+                <option value="git">Git</option>
+            </select>
+            <div class = title>
+                <label for="title">title</label>
+                <input type="text" name="title" id="title" required>
+            </div>
+            <div class = content>
+                <label for="title">description</label>
+                <textarea name="description" id="content" required></textarea>
+            </div>
+            <div class = the_link>
+                <label for="the_link">link to resource</label>
+                <input type="text" name="the_link" id="the_link" required>
+            </div>
+            <input type="submit" value="Add" id="post">
+        </form>
+    </div>
+    <div class = container_1>
+        <h3>Add admin privileges</h3>
+        <form action="/add_admin" method="POST">
+            <div class = admin_account>
+                <label for="admin_account">Account name</label>
+                <input type="text" name="admin_account" id="admin_account" required>
+            </div>
+            <input type="submit" value="make admin" id="make_admin">
+        </form>
+    </div>
+    <footer>
+        <div class = footer_div>
+            <h4>Contact us</h4>
+            <a href="https://www.instagram.com/reso.urcehub/"><img src="../static/images/instagram.png" width="16px" height="16px"></a>
+            <a href="#"><img src="../static/images/facebook.png" width="16px" height="16px"></a>
+            <a href="#"><img src="../static/images/twitter.png" width="16px" height="16px"></a>
+        </div>
+        <div class="copyright"><h6>&copy;resourcehub 2023</h6></div>
+    </footer>  
+  </body>
+</html>
