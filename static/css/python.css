@@ -24,6 +24,7 @@ footer h4{
     font-weight: 500;
     margin-left: 2rem;
     font-size: medium;
+    margin-top: 0.3rem;
 }
 
 footer a{
@@ -172,7 +173,7 @@ header a:hover{
 .link {
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     margin-top: 1rem;
     margin-bottom: 2rem;
 }
@@ -240,6 +241,10 @@ header a:hover{
     display: flex;
     align-items: center;
     margin-top: 0.2rem;
+}
+
+.copyright h6 {
+    font-size: small;
 }
 
 .feedback {
@@ -401,14 +406,8 @@ header a:hover{
     }
 
     .footer_div {
-        flex-wrap: wrap;
-        width: 7rem;
+        width: 15rem;
         height: 3rem;
-    }
-
-    footer img {
-        margin-top: -0.8rem;
-        margin-left: -0.1rem;
     }
 
     footer h4 {
@@ -422,5 +421,57 @@ header a:hover{
 
     header h3 {
         font-size: x-large;
+    }
+
+    footer {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .copyright {
+        padding-left: 1rem;
+    }
+
+    .feed_form {
+        flex-direction: column;
+        align-items: flex-start;
+        height: 16rem;
+    }
+
+    .radio_0 {
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        margin-left: 1rem;
+        width: 10rem;
+    }
+
+    #submit_rating {
+        margin-left: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .radio_0:nth-of-type(1) label {
+        margin-right: 1rem;
+    }
+
+    .radio_0:nth-of-type(2) label {
+        margin-right: 1.2rem;
+    }
+
+    .radio_0:nth-of-type(3) label {
+        margin-right: 0.9rem;
+    }
+
+    .radio_0:nth-of-type(4) label {
+        margin-right: 1.28rem;
+    }
+
+    .radio_0:nth-of-type(5) label {
+        margin-right: 1.44rem;
+    }
+
+    .radio_0:nth-of-type(6) label {
+        margin-right: 0.54rem;
     }
 }

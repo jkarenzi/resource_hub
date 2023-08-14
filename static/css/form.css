@@ -14,9 +14,9 @@ body {
     display: flex;
     flex-direction: column;
     border: 1px solid lightgrey;
-    width: 25rem;
+    width: 28rem;
     background-color: white;
-    height: 31rem;
+    height: 36rem;
     box-shadow: 2px 4px 5px lightgrey;
     border-radius: 6px;
 }
@@ -25,9 +25,9 @@ body {
     display: flex;
     flex-direction: column;
     border: 1px solid lightgrey;
-    width: 25rem;
+    width: 28rem;
     background-color: white;
-    height: 31rem;
+    height: 36rem;
     margin-left: 2rem;
     box-shadow: 2px 4px 5px lightgrey;
     border-radius: 8px;
@@ -41,7 +41,7 @@ body {
 }
 
 .pyd {
-    font-size: small;
+    font-size: medium;
     font-weight: 300;
     margin-left: 2rem;
     margin-top: -1rem;
@@ -49,7 +49,7 @@ body {
 }
 
 .pyd1 {
-    font-size: small;
+    font-size: medium;
     font-weight: 300;
     margin-left: 2rem;
     margin-top: -1rem;
@@ -59,11 +59,13 @@ body {
 .container1 h3{
     font-weight: 400;
     margin-left: 2rem;
+    font-size: x-large;
 }
 
 .container2 h3{
     font-weight: 400;
     margin-left: 2rem;
+    font-size: x-large;
 }
 
 .container1 a{
@@ -255,9 +257,9 @@ footer a{
     display: flex;
     flex-direction: column;
     border: 1px solid lightgrey;
-    width: 25rem;
+    width: 28rem;
     background-color: white;
-    height: 31rem;
+    height: 36rem;
     box-shadow: 2px 4px 5px lightgrey;
     border-radius: 6px;
 }
@@ -266,9 +268,9 @@ footer a{
     display: flex;
     flex-direction: column;
     border: 1px solid lightgrey;
-    width: 25rem;
+    width: 28rem;
     background-color: white;
-    height: 31rem;
+    height: 36rem;
     margin-left: 2rem;
     box-shadow: 2px 4px 5px lightgrey;
     border-radius: 8px;
@@ -285,11 +287,13 @@ footer a{
 .container3 h3{
     font-weight: 400;
     margin-left: 2rem;
+    font-size: x-large;
 }
 
 .container4 h3{
     font-weight: 400;
     margin-left: 2rem;
+    font-size: x-large;
 }
 
 .container3 a{
@@ -313,7 +317,7 @@ footer a{
     padding: 0.5rem;
     text-align: center;
     color: green;
-    margin-top: 0.3rem;
+    margin-top: 1.8rem;
 }
 
 
@@ -349,6 +353,11 @@ footer a{
     display: flex;
     align-items: center;
     margin-top: 0.2rem;
+}
+
+.copyright h6 {
+    font-size: small;
+    font-weight: 500;
 }
 
 .login {
@@ -431,6 +440,43 @@ footer a{
     height: 2.5rem;
 }
 
+.intro-resources {
+    color: black;
+    background: white;
+    width: 90%;
+    height: 33rem;
+    margin-left: 3.5rem;
+    border: 1px solid lightgrey;
+    border-radius: 6px;
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.intro-t {
+    margin-left: 2rem;
+    font-weight: 500;
+    margin-top: 2rem;
+    font-size: xx-large;
+    font-family: 'Dancing script', cursive;
+    color: green;
+}
+
+.intro-p {
+    margin-left: 2rem;
+    width: 50%;
+    margin-right: 2rem;
+    font-size: large;
+    line-height: 2rem;
+}
+
+.slogan {
+    color: green;
+    font-family: 'Dancing script', cursive;
+    font-weight: 500;
+    margin-left: 2rem;
+}
+
 @media (max-width: 768px) {
     .menu-toggle { 
         display: block;
@@ -498,26 +544,75 @@ footer a{
     }
 
     .footer_div {
-        flex-wrap: wrap;
-        width: 7rem;
+        width: 15rem;
         height: 3rem;
     }
 
-    footer a {
-        margin-top: -1.2rem;
-    }
-
-    footer h4 {
+    .footer_div h4{
         margin-left: 1rem;
-        font-size: small;
-        margin-top: -0.1rem;
-    }
-
-    footer h6 {
-        font-size: small;
     }
 
     header h3 {
         font-size: x-large;
+    }
+
+    footer {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .copyright {
+        padding-left: 1rem;
+        height: 1.5rem;
+    }
+
+    .copyright h6 {
+        font-size: small;
+        font-weight: 500;
+    }
+
+    .pyd {
+        font-size: small;
+    }
+
+    .pyd1 {
+        font-size: small;
+    }
+
+    .container1 h3 {
+        font-size: large;
+        font-weight: 500;
+    }
+
+    .container2 h3 {
+        font-size: large;
+        font-weight: 500;
+    }
+
+    .container3 h3 {
+        font-size: large;
+        font-weight: 500;
+    }
+
+    .container4 h3 {
+        font-size: large;
+        font-weight: 500;
+    }
+
+    .intro-resources {
+        margin-left: 1rem;
+        line-height:normal;
+        height: 28rem;
+    }
+
+    .intro-p {
+        width: 80%;
+        font-size: small;
+        line-height: 1.2rem;
+        font-weight: 300;
+    }
+
+    .profile-pic h3 {
+        margin-left: 1rem;
     }
 }

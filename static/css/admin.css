@@ -24,6 +24,7 @@ footer h4{
     font-weight: 500;
     margin-left: 2rem;
     font-size: medium;
+    margin-top: 0.3rem;
 }
 
 footer a{
@@ -321,6 +322,11 @@ header a:hover{
     border: 1px solid grey;
 }
 
+.copyright h6 {
+    font-size: small;
+    font-weight: 500;
+}
+
 /* responsiveness*/
 .hide {
     display: flex;
@@ -397,19 +403,12 @@ header a:hover{
     }
 
     .footer_div {
-        flex-wrap: wrap;
-        width: 7rem;
+        width: 15rem;
         height: 3rem;
-    }
-
-    footer img {
-        margin-top: -0.8rem;
-        margin-left: -0.1rem;
     }
 
     footer h4 {
         margin-left: 1rem;
-        font-size: small;
     }
 
     footer h6 {
@@ -418,5 +417,14 @@ header a:hover{
 
     header h3 {
         font-size: x-large;
+    }
+
+    footer {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .copyright {
+        padding-left: 1rem;
     }
 }

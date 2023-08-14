@@ -11,7 +11,7 @@ body {
 
 .container {
     width: 30rem;
-    height: 30rem;
+    height: 33rem;
     border: 2px solid lightgrey;
     box-shadow: 2px 4px 5px lightgrey;
     background-color: #ffffff;
@@ -76,6 +76,7 @@ body {
 .error{
     color: red;
     text-align: center;
+    margin-top: -1rem;
 }
 
 .login {
@@ -96,7 +97,7 @@ body {
     justify-content: center;
     align-items: center;
     margin-top: -1rem;
-    top: 31vh;
+    top: 1rem;
     left: 0rem;
 }
 
@@ -116,7 +117,7 @@ body {
 @media (max-width: 768px) {
     .container {
         width: 20rem;
-        height: 26.5rem;
+        height: 32.5rem;
     }
 
     #submit{
@@ -138,4 +139,15 @@ body {
     .us,.pa{
         margin-left: 2.5rem;
     }
+}
+
+.login-logo {
+    font-family: 'Dancing script', cursive;
+    color: green;
+    font-size: xx-large;
+    font-weight: 500;
+}
+
+.container form {
+    margin-top: -1rem;
 }
