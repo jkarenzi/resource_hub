@@ -413,8 +413,28 @@ def get_admin():
             filename = 'person.png'
         else:
             filename = user_file  
-        return render_template('admin.html', filename=filename, username = session.get('username'))
-    return "PLZ LOG IN WITH ADMIN ACCOUNT TO ACCESS THIS ROUTE"
+
+        topic = request.args.get("topic_feedback", "")
+        connection = pymysql.connect(
+            host='54.82.71.184',
+            user='karenzi',
+            password='@Karenzijoslyn46',
+            database='posts'
+        )
+
+        cursor = connection.cursor()
+
+        sql_query = 'SELECT * FROM ratings WHERE topic = %s'
+        cursor.execute(sql_query, (topic,))
+        rating_results = cursor.fetchall()
+
+        if not rating_results and topic:
+            error = "No feedback available"
+            return render_template('admin.html', filename=filename, username = session.get('username'), rating_results=rating_results, error=error)
+
+        return render_template('admin.html', filename=filename, username = session.get('username'), rating_results=rating_results)
+    error_message = 'Unauthorized access. Please login with an admin account to access this route'
+    return render_template('no_access.html', error_message=error_message)
 
 
 #route that handles posting of resources
@@ -467,7 +487,8 @@ def del_resource():
         return redirect('/form')
 
     else:
-        return redirect('/')
+        error_message = 'Unauthorized access. Please login with an admin account to access this route'
+        return render_template('no_access.html', error_message=error_message)
 
 
 #this route calculates avg rating and stores it in db
@@ -477,6 +498,9 @@ def rating():
         rating = int(request.form.get('rating'))
         resource_id = int(request.form.get('resource_id'))
         user = request.form.get('user')
+        feedback = request.form.get('optional_feed')
+        topic = request.form.get('topic')
+        title = request.form.get('title')
 
         connection = pymysql.connect(
             host='54.82.71.184',
@@ -494,10 +518,15 @@ def rating():
             if name[0] == user:
                 flash("You've rated this resource before", "rate1")
                 return redirect('/form')
+        if feedback:
+            sql_query = 'INSERT INTO ratings (resource_id, user, rating, description, topic, title) VALUES (%s, %s, %s, %s, %s, %s)'
+            cursor.execute(sql_query, (resource_id, user, rating, feedback, topic, title))
+            connection.commit()
+        else:
+            sql_query = 'INSERT INTO ratings (resource_id, user, rating, topic) VALUES (%s, %s, %s, %s, %s)'
+            cursor.execute(sql_query, (resource_id, user, rating, topic, title))
+            connection.commit()
 
-        sql_query = 'INSERT INTO ratings (resource_id, user, rating) VALUES (%s, %s, %s)'
-        cursor.execute(sql_query, (resource_id, user, rating))
-        connection.commit()
 
         sql_query1 = 'SELECT rating FROM ratings WHERE resource_id = %s'
         cursor.execute(sql_query1, (resource_id,))
@@ -556,6 +585,6 @@ def add_admin():
     flash("&#9888; Account doesn't exist", "admin")
     return redirect('/admin.html')     
 
-
+    
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)

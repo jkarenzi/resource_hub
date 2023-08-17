@@ -1,0 +1,30 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-logo {
+    font-family: 'Dancing script', cursive;
+    color: green;
+    font-size: xx-large;
+    font-weight: 500;
+}
+
+p {
+    margin-left: 1rem;
+    margin-right: 1rem;
+}

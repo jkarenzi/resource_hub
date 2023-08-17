@@ -32,14 +32,14 @@
                 </div>
             </div>
             <div class = drop>
-                <a href="./read_stats.html?filename={{filename}}">community</a>
-                <a href="/logout">logout</a>
+                <a href="./read_stats.html">Community</a>
+                <a href="/logout">Logout</a>
             </div>
             <a href="./form.html"><h3>Resourcehub</h3></a>
                 <nav>
                     <div class = hide>
-                        <a href="./read_stats.html?filename={{filename}}">community</a>
-                        <a href="/logout">logout</a>
+                        <a href="./read_stats.html">Community</a>
+                        <a href="/logout">Logout</a>
                     </div>
                     <div class = user onclick="toggleProfile()">
                         {{username}}
@@ -82,31 +82,39 @@
                     </div>
                     <div class = feedback id="rate-form-{{ resource[0] }}">
                         <form action="/rating" method='POST' class="feed_form">
-                            <input type="hidden" name="resource_id" value="{{ resource[0] }}">
-                            <input type="hidden" name="user" value= '{{ username }}'>
-                            <div class="radio_0">
-                                <label for="0">Horrible</label>
-                                <input type="radio" name="rating" value="0" required>
+                            <div class = radio_class>
+                                <input type="hidden" name="resource_id" value="{{ resource[0] }}">
+                                <input type="hidden" name="user" value= '{{ username }}'>
+                                <input type="hidden" name="topic" value = '{{ resource[2] }}'>
+                                <input type="hidden" name="title" value = '{{ resource[3] }}'>
+                                <div class="radio_0">
+                                    <label for="0">Horrible</label>
+                                    <input type="radio" name="rating" value="0" required>
+                                </div>
+                                <div class="radio_0">
+                                    <label for="1">Terrible</label>
+                                    <input type="radio" name="rating" value="1">
+                                </div>
+                                <div class="radio_0">
+                                    <label for="2">Not bad</label>
+                                    <input type="radio" name="rating" value="2">
+                                </div>
+                                <div class="radio_0">
+                                    <label for="3">Neutral</label>
+                                    <input type="radio" name="rating" value="3">
+                                </div>
+                                <div class="radio_0">
+                                    <label for="4">Helpful</label>
+                                    <input type="radio" name="rating" value="4">
+                                </div>
+                                <div class="radio_0">
+                                    <label for="5">Excellent</label>
+                                    <input type="radio" name="rating" value="5">
+                                </div>
                             </div>
-                            <div class="radio_0">
-                                <label for="1">Terrible</label>
-                                <input type="radio" name="rating" value="1">
-                            </div>
-                            <div class="radio_0">
-                                <label for="2">Not bad</label>
-                                <input type="radio" name="rating" value="2">
-                            </div>
-                            <div class="radio_0">
-                                <label for="3">Neutral</label>
-                                <input type="radio" name="rating" value="3">
-                            </div>
-                            <div class="radio_0">
-                                <label for="4">Helpful</label>
-                                <input type="radio" name="rating" value="4">
-                            </div>
-                            <div class="radio_0">
-                                <label for="5">Excellent</label>
-                                <input type="radio" name="rating" value="5">
+                            <div class = feed_text>
+                                <label for="feed_desc">Why did you choose this rating? (optional)</label>
+                                <textarea name="optional_feed" id="feed_text"></textarea>
                             </div>
                             <input type="submit" value="Rate us" id="submit_rating">
                         </form>

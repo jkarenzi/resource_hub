@@ -373,6 +373,74 @@ header a:hover{
     height: 2rem;
 }
 
+/* user feedback category */
+.container_2 {
+    display: flex;
+    flex-direction: column;
+    border: 3px solid white;
+    width: 50%;
+    background-color: white;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    margin-left: 2rem;
+    box-shadow: 2px 4px 10px lightgrey;
+}
+
+.feed_form1 {
+    display: flex;
+    flex-direction: column;
+}
+
+#view_feedback {
+    background: green;
+    border: 1px solid green;
+    color: white;
+    margin-top: 1rem;
+    width: 10rem;
+    height: 1.8rem;
+    cursor: pointer;
+    border-radius: 0.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#topic_feedback {
+    width: 15rem;
+}
+
+.container_3 {
+    display: flex;
+    flex-direction: column;
+    border: 3px solid white;
+    width: 90%;
+    background-color: white;
+    padding: 1rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    margin-left: 2rem;
+    box-shadow: 2px 4px 10px lightgrey;
+    min-height: 10rem;
+}
+
+.title_rate {
+    font-size: x-large;
+    color: green;
+}
+
+.rater {
+    border: 1px solid black;
+    padding-left: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;  
+}
+
+.error1 {
+    margin-left: 2rem;
+    font-size: large;
+}
+
+
 @media (max-width: 768px) {
     .menu-toggle { 
         display: block;
@@ -402,6 +470,15 @@ header a:hover{
         margin-left: 1rem;
     }
 
+    .container_2 {
+        width: 90%;
+        margin-left: 1rem;
+    }
+
+    .container_3 {
+        margin-left: 1rem;
+    }
+
     .footer_div {
         width: 15rem;
         height: 3rem;
@@ -428,3 +505,4 @@ header a:hover{
         padding-left: 1rem;
     }
 }
+

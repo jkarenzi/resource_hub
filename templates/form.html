@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>resourcehub</title>
+        <title>Resourcehub</title>
         <meta charset = 'UTF-8'>
         <link rel="stylesheet" href="../static/css/form.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,18 +23,18 @@
             <h3>Resourcehub</h3>
             <div class = drop>
                 {% if admin_status %}
-                    <a href="./admin.html?filename={{filename}}">admin</a>
+                    <a href="./admin.html">Admin</a>
                 {% endif %}
-                <a href="./read_stats.html?filename={{filename}}">community</a>
+                <a href="./read_stats.html">Community</a>
                 <a href="/logout">logout</a>
             </div>
             <nav>
                 <div class = hide>
                     {% if admin_status %}
-                        <a href="./admin.html?filename={{filename}}">admin</a>
+                        <a href="./admin.html">Admin</a>
                     {% endif %}
-                    <a href="./read_stats.html?filename={{filename}}">community</a>
-                    <a href="/logout">logout</a>
+                    <a href="./read_stats.html">Community</a>
+                    <a href="/logout">Logout</a>
                 </div>
                 <div class = user onclick="toggleProfile()">
                     {{username}}
@@ -77,6 +77,17 @@
                 </p>
                 <h1 class = slogan>Scroll, Click, Learn</h1>
             </div>
+            <div class = gibb2>
+                <div class = intro-t>Resourcehub</div>
+                <img src="../static/images/icons8-earth-care.svg" width="100px" height="100px">
+                <svg width="200" height="100" xmlns="http://www.w3.org/2000/svg">
+                    <path id="curve" d="M10 50 Q 100 90 190 50" fill="transparent" />
+                    <text font-size="27">
+                      <textPath xlink:href="#curve" class="slogan">Scroll, Click, Learn</textPath>
+                    </text>
+                </svg>
+                
+            </div>
         </div>
         <div class = big-container>
             <div class = container1>
@@ -101,7 +112,7 @@
                     with a comprehensive learning experience. Elevate your skills
                     to new heights and unleash your potential as a proficient shell scripter!
                     Whether you're a beginner or an experienced developer, our resources will 
-                    help you tackle complex tasks and boost your efficiency. Join our community and embark
+                    help you tackle complex tasks and boost your efficiency. Embark
                     on a rewarding shell scripting journey today!
                 </p>
                 <a href="./linux.html?filename={{filename}}">Explore</a>

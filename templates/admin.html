@@ -33,13 +33,13 @@
         </div>
         <a href="./form.html"><h3>Resourcehub</h3></a>
         <div class = drop>
-            <a href="./read_stats.html?filename={{filename}}">community</a>
-            <a href="/logout">logout</a>
+            <a href="./read_stats.html">Community</a>
+            <a href="/logout">Logout</a>
         </div>
         <nav>
             <div class = hide>
-                <a href="./read_stats.html?filename={{filename}}">community</a>
-                <a href="/logout">logout</a>
+                <a href="./read_stats.html">Community</a>
+                <a href="/logout">Logout</a>
             </div>
             <div class = user onclick="toggleProfile()">
                 {{username}}
@@ -105,6 +105,34 @@
             <input type="submit" value="make admin" id="make_admin">
         </form>
     </div>
+    <div class = container_2>
+        <h3>View user feedback</h3>
+        <form action="/admin.html" method="GET" class="feed_form1">
+            <select name="topic_feedback" id="topic_feedback" required>
+                <option value="" disabled selected>Select topic to review</option>
+                <option value="python">Python</option>
+                <option value="shell scripting">Shell Scripting</option>
+                <option value="frontend development">Frontend Development</option>
+                <option value="git">Git</option>
+            </select>
+            <input type="submit" value="View feedback" id="view_feedback">
+        </form>
+    </div>
+    {% if rating_results %}
+        <div class = container_3>
+            {% for item in rating_results %}
+                <div class = rater>
+                    <div class = title_rate>{{ item[6] }}</div>
+                    <div class = id_rate>Resource id: {{item[1]}}</div>
+                    <div class = name_rate>Rated by: {{ item[2] }}</div>
+                    <div class = rate_rate>Rating: {{ item[3] }}/5</div>
+                    <div class = desc_rate>"{{ item[4] }}"</div>
+                </div>
+            {% endfor %}    
+        </div> 
+    {% else %}
+          <p class = error1>{{ error }}</p>     
+    {% endif %}    
     <footer>
         <div class = footer_div>
             <h4>Contact us</h4>
